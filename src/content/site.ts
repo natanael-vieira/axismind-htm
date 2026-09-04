@@ -9,10 +9,10 @@ export const site = {
   minimumAge: 18,
   legalVersion: '2026-09-04.1',
   support: {
-    enabled: false,
-    beneficiary: null as string | null,
-    institution: null as string | null,
-    pixKey: null as string | null,
+    enabled: true,
+    beneficiary: 'Natanael Sales Vieira',
+    pixKey: 'natanaelsales@live.com',
+    pixQrCode: '/brand/pix-qrcode.png',
   },
 } as const;
 
