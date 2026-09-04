@@ -28,7 +28,7 @@ Publicar, em um único repositório separado, um site acessível e responsivo qu
 
 ## Critérios do único passo de publicação
 
-No mesmo candidato: definir repositório/domínio e `basePath`; validar canal `natnaelsales@gmail.com`; obter revisão jurídica; substituir as imagens conceituais por capturas reais do mesmo AAB homologado e sem dados pessoais; revisar acessibilidade, links, responsividade, metadados e contraste; confirmar se a página de apoio é compatível com os termos da hospedagem; executar `npm ci`, `typecheck` e `build`; habilitar **Settings → Pages → GitHub Actions**; publicar; validar todas as URLs em HTTPS; então registrar a URL da política no aplicativo e na Play Console.
+No mesmo candidato: definir repositório/domínio e `basePath`; validar canal `natnaelsales@gmail.com`; obter revisão jurídica; substituir as imagens conceituais por capturas reais do mesmo AAB homologado e sem dados pessoais; revisar acessibilidade, links, responsividade, metadados e contraste; confirmar se a página de apoio é compatível com os termos da hospedagem; executar `yarn install --frozen-lockfile`, `yarn typecheck` e `yarn build`; habilitar **Settings → Pages → GitHub Actions**; publicar; validar todas as URLs em HTTPS; então registrar a URL da política no aplicativo e na Play Console.
 
 ## Limites e riscos
 

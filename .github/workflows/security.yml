@@ -1,0 +1,48 @@
+name: Verificações de segurança
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "17 10 * * 1"
+
+permissions: {}
+
+jobs:
+  codeql:
+    name: Analisar código com CodeQL
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Inicializar o CodeQL
+        uses: github/codeql-action/init@fddeee1a7ece751b577e409a89057319e3172939 # v4
+        with:
+          languages: javascript-typescript
+      - name: Analisar
+        uses: github/codeql-action/analyze@fddeee1a7ece751b577e409a89057319e3172939 # v4
+
+  dependency-review:
+    name: Revisar dependências
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Bloquear dependências vulneráveis
+        uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5
+        with:
+          fail-on-severity: moderate

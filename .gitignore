@@ -1,7 +1,30 @@
 node_modules/
 .next/
 out/
+coverage/
+.vercel/
+
+# Configuração local e variáveis de ambiente
 .env*
 !.env.example
+.envrc
+.npmrc
+.yarnrc
+
+# Credenciais, certificados e chaves privadas
+credentials*.json
+service-account*.json
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# Arquivos locais de ferramentas e sistema
+.idea/
+.vscode/
+/AGENTS.md
+/CLAUDE.md
 *.tsbuildinfo
 .DS_Store
