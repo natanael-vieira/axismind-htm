@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <defs>
+    <linearGradient id="sand" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F2EFE7"/><stop offset=".48" stop-color="#F7F4ED"/><stop offset="1" stop-color="#E6E0E5"/>
+    </linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#28363B" flood-opacity=".12"/></filter>
+  </defs>
+  <rect width="1440" height="900" fill="url(#sand)"/>
+  <rect width="1440" height="84" fill="#F2EFE7" fill-opacity=".92"/>
+  <line y1="84" x2="1440" y2="84" stroke="#D8D1C6"/>
+  <circle cx="70" cy="42" r="22" fill="#F2B68F"/><path d="M49 42c13-7 27 8 43 0v15c-15 8-29-7-43 0z" fill="#59818F"/>
+  <text x="106" y="50" fill="#28363B" font-family="sans-serif" font-size="25">axis<tspan font-weight="700">mind</tspan></text>
+  <g fill="#5F6C70" font-family="sans-serif" font-size="16" font-weight="600"><text x="480" y="49">Início</text><text x="555" y="49">Como usar</text><text x="665" y="49">Privacidade</text><text x="785" y="49">Termos</text><text x="870" y="49">Apoie o projeto</text></g>
+  <rect x="1195" y="21" width="170" height="48" rx="24" fill="#F7F4ED" stroke="#D8D1C6"/><text x="1240" y="51" font-family="sans-serif" font-size="16" font-weight="700" fill="#28363B">Fale conosco</text>
+  <text x="70" y="190" font-family="sans-serif" font-size="15" font-weight="700" letter-spacing="4" fill="#426A73">CUIDADO PESSOAL, NO SEU RITMO</text>
+  <text x="70" y="275" font-family="sans-serif" font-size="67" font-weight="300" fill="#28363B"><tspan x="70">Um espaço privado</tspan><tspan x="70" dy="78">para organizar o que</tspan><tspan x="70" dy="78">você sente</tspan></text>
+  <text x="70" y="560" font-family="sans-serif" font-size="20" fill="#5F6C70"><tspan x="70">Diário local de bem-estar emocional, com relatos,</tspan><tspan x="70" dy="34">check-ins e preparação para conversas de cuidado.</tspan></text>
+  <rect x="70" y="650" width="285" height="62" rx="31" fill="#426A73"/><text x="105" y="690" font-family="sans-serif" font-size="18" font-weight="700" fill="#F7F4ED">Entenda como funciona →</text>
+  <rect x="690" y="200" width="670" height="490" rx="34" fill="#F7F4ED" filter="url(#shadow)"/>
+  <rect x="714" y="224" width="150" height="6" rx="3" fill="#F2B68F"/><rect x="864" y="224" width="160" height="6" fill="#9A90AA"/><rect x="1024" y="224" width="160" height="6" fill="#59818F"/><rect x="1184" y="224" width="150" height="6" rx="3" fill="#40616B"/>
+  <image href="../../public/screenshots/jornada-principal.png" x="716" y="250" width="618" height="412" preserveAspectRatio="xMidYMid meet"/>
+  <text x="70" y="820" font-family="sans-serif" font-size="14" fill="#5F6C70">Mockup estrutural — a interface executável no repositório é a referência visual.</text>
+</svg>

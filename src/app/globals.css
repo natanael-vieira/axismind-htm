@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #F2EFE7;
+  color: #28363B;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-rendering: optimizeLegibility;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  opacity: .72;
+  background:
+    radial-gradient(circle at 10% 8%, rgba(242,182,143,.26), transparent 28rem),
+    radial-gradient(circle at 88% 14%, rgba(154,144,170,.25), transparent 32rem),
+    radial-gradient(circle at 48% 82%, rgba(89,129,143,.15), transparent 36rem);
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .18;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+}
+a { color: inherit; }
+
+@layer components {
+  .axis-container { @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12; }
+  .focus-ring { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-axis-teal focus-visible:ring-offset-4 focus-visible:ring-offset-axis-canvas; }
+  .nav-link { @apply rounded-full px-4 py-3 text-sm font-semibold text-axis-body transition-colors hover:bg-axis-muted hover:text-axis-ink; }
+  .nav-pill { @apply shrink-0 rounded-full border border-axis-line bg-axis-surface px-4 py-2 text-sm font-semibold; }
+  .button-primary { @apply inline-flex min-h-14 items-center justify-center rounded-full bg-axis-teal px-7 py-3 text-center font-bold text-axis-surface shadow-sm transition-transform hover:-translate-y-0.5 focus-ring; }
+  .button-secondary { @apply min-h-12 items-center justify-center rounded-full border border-axis-line bg-axis-surface px-5 py-2 text-center text-sm font-bold transition-colors hover:border-axis-teal focus-ring; }
+  .eyebrow { @apply text-sm font-bold uppercase tracking-[.2em] text-axis-teal; }
+  .soft-card { @apply rounded-axis border border-axis-line/80 bg-axis-surface/90 shadow-soft backdrop-blur-sm; }
+  .footer-title { @apply mb-4 text-sm font-bold uppercase tracking-wider text-axis-ink; }
+  .footer-list { @apply space-y-3 text-sm text-axis-body; }
+  .footer-list a { @apply underline-offset-4 hover:text-axis-teal hover:underline; }
+}
+
+.skip-link { position: fixed; left: 1rem; top: -5rem; z-index: 100; border-radius: 999px; background: #28363B; color: #F7F4ED; padding: .8rem 1rem; font-weight: 700; }
+.skip-link:focus { top: 1rem; }
+.axis-scrollbar { scrollbar-width: none; }
+.axis-scrollbar::-webkit-scrollbar { display: none; }
+.text-balance { text-wrap: balance; }
+.wave-rule { height: 5px; border-radius: 999px; background: linear-gradient(90deg, #F2B68F 0 24%, #9A90AA 24% 50%, #59818F 50% 75%, #40616B 75%); }
+.legal-article { max-width: 56rem; }
+.legal-article section { margin-top: 1.25rem; border: 1px solid #D8D1C6; border-radius: 1.5rem; background: rgba(247,244,237,.88); padding: clamp(1.25rem, 3vw, 2rem); }
+.legal-article h2 { margin: 0 0 .8rem; font-size: 1.35rem; font-weight: 700; }
+.legal-article h3 { margin: 1.4rem 0 .5rem; font-weight: 700; }
+.legal-article p, .legal-article li { color: #5F6C70; line-height: 1.75; }
+.legal-article ul { margin: .8rem 0 0; padding-left: 1.25rem; list-style: disc; }
