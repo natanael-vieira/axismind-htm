@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { BrandMark } from './BrandMark';
-import { navigation } from '@/content/site';
+import { NavigationLinks } from './NavigationLinks';
 
 export function Header() {
   return (
@@ -10,30 +10,14 @@ export function Header() {
           <BrandMark />
         </Link>
         <nav aria-label="Navegação principal" className="hidden items-center gap-1 lg:flex">
-          {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={item.href === '/apoie/' ? 'nav-support focus-ring' : 'nav-link focus-ring'}
-            >
-              {item.label}
-            </Link>
-          ))}
+          <NavigationLinks variant="desktop" />
         </nav>
         <a href="mailto:natnaelsales@gmail.com" className="button-secondary hidden sm:inline-flex">
           Fale conosco
         </a>
       </div>
       <nav aria-label="Navegação móvel" className="axis-scrollbar flex gap-2 overflow-x-auto px-4 pb-3 lg:hidden">
-        {navigation.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={item.href === '/apoie/' ? 'nav-support focus-ring' : 'nav-pill focus-ring'}
-          >
-            {item.label}
-          </Link>
-        ))}
+        <NavigationLinks variant="mobile" />
       </nav>
     </header>
   );

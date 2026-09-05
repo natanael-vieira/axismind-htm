@@ -1,17 +1,18 @@
 import { expect, test } from '@playwright/test';
 
 const routes = [
-  ['/', 'Um espaço privado para organizar o que você sente'],
-  ['/como-usar/', 'Comece com calma e mantenha você no controle.'],
-  ['/privacidade/', 'Política de Privacidade'],
-  ['/termos/', 'Termos de Uso'],
-  ['/apoie/', 'Ajude o axismind a continuar cuidadoso e independente.'],
+  ['/', 'Um espaço privado para organizar o que você sente', 'Início'],
+  ['/como-usar/', 'Comece com calma e mantenha você no controle.', 'Como usar'],
+  ['/privacidade/', 'Política de Privacidade', 'Privacidade'],
+  ['/termos/', 'Termos de Uso', 'Termos'],
+  ['/apoie/', 'Ajude o axismind a continuar cuidadoso e independente.', 'Apoie o projeto'],
 ] as const;
 
 test('todas as rotas públicas carregam seu conteúdo principal', async ({ page }) => {
-  for (const [route, heading] of routes) {
+  for (const [route, heading, activeLabel] of routes) {
     await page.goto(route);
     await expect(page.getByRole('heading', { level: 1, name: heading })).toBeVisible();
+    await expect(page.locator('a[aria-current="page"]:visible', { hasText: activeLabel })).toBeVisible();
   }
 });
 
