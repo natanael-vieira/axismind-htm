@@ -1,5 +1,7 @@
 import { CheckCircle, DownloadSimple, Microphone, Notebook, ShieldCheck } from '@phosphor-icons/react/dist/ssr';
+import Image from 'next/image';
 import { PageIntro } from '@/components/PageIntro';
+import { publicPath } from '@/content/site';
 
 const steps = [
   { icon: ShieldCheck, title: 'Crie seu cofre', body: 'Leia os documentos, confirme que tem 18 anos ou mais e defina uma senha forte. Ela protege o cofre local e não é enviada para nós.' },
@@ -22,6 +24,29 @@ export default function HowToPage() {
             <div><p className="text-xs font-bold uppercase tracking-widest text-axis-clay">Passo {index + 1}</p><h2 className="mt-2 text-2xl font-bold">{title}</h2><p className="mt-3 leading-7 text-axis-body">{body}</p></div>
           </article>
         ))}
+      </section>
+      <section className="axis-container pt-12">
+        <div className="soft-card grid items-center gap-10 overflow-hidden p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(300px,430px)] lg:p-12">
+          <div>
+            <p className="eyebrow">Demonstração visual</p>
+            <h2 className="mt-4 text-3xl font-normal sm:text-4xl">Veja como é simples usar o aplicativo</h2>
+            <p className="mt-4 max-w-xl leading-7 text-axis-body">
+              A animação mostra uma jornada real no aplicativo: consentimento, criação do cofre, perfil com foto, relato, reflexão, voz e relatório. Ela foi apenas acelerada e não contém instruções sobrepostas à interface.
+            </p>
+          </div>
+          <div className="relative mx-auto w-full max-w-[360px] rounded-[3rem] border-[10px] border-axis-ink bg-axis-ink p-1 shadow-[0_28px_70px_rgba(35,54,57,0.24)]">
+            <span aria-hidden="true" className="absolute left-1/2 top-2 z-10 h-5 w-24 -translate-x-1/2 rounded-full bg-axis-ink" />
+            <span aria-hidden="true" className="absolute -right-[14px] top-36 h-20 w-1 rounded-r-full bg-axis-ink" />
+            <Image
+              src={publicPath('/media/axismind-como-usar.gif')}
+              width={320}
+              height={712}
+              unoptimized
+              alt="Demonstração animada dos cinco passos para usar o axismind"
+              className="h-auto w-full rounded-[2.25rem] bg-axis-surface object-contain"
+            />
+          </div>
+        </div>
       </section>
       <section className="axis-container py-16">
         <div className="soft-card border-l-4 border-l-axis-clay p-7 sm:p-9">

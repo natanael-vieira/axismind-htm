@@ -11,7 +11,7 @@ export const site = {
   support: {
     enabled: true,
     beneficiary: 'Natanael Sales Vieira',
-    pixKey: 'natanaelsales@live.com',
+    pixKey: 'natnaelsales@gmail.com',
     pixQrCode: '/brand/pix-qrcode.png',
   },
 } as const;
@@ -30,22 +30,22 @@ export const navigation = [
 export const screenshots = [
   {
     src: '/screenshots/jornada-principal.png',
-    alt: 'Conjunto de telas do axismind com início, relato, gravação, reflexão, diário e privacidade',
+    alt: 'Mosaico com oito capturas reais da jornada principal do axismind',
     title: 'Jornada principal',
   },
   {
     src: '/screenshots/cuidado-e-consulta.png',
-    alt: 'Telas de plano de cuidado e preparação para consulta',
+    alt: 'Mosaico com oito capturas reais de recursos de cuidado e preparação para consulta do axismind',
     title: 'Cuidado e consulta',
   },
   {
     src: '/screenshots/entendimento.png',
-    alt: 'Telas de entendimento e detalhes de observações',
+    alt: 'Mosaico com oito capturas reais de recursos de entendimento sem diagnóstico do axismind',
     title: 'Entendimento sem diagnóstico',
   },
   {
     src: '/screenshots/exportacao.png',
-    alt: 'Telas de exportação e recuperação do cofre local',
+    alt: 'Mosaico com oito capturas reais de exportação, privacidade e recuperação do axismind',
     title: 'Exportação sob controle da pessoa',
   },
 ] as const;

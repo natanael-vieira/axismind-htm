@@ -1,6 +1,6 @@
 # axismind-htm
 
-Site institucional estático do axismind, preparado para GitHub Pages com Next.js, React e Tailwind CSS.
+Site institucional estático do axismind, publicado no GitHub Pages com Next.js, React e Tailwind CSS: **https://natanael-vieira.github.io/axismind-htm/**
 
 ## Desenvolvimento
 
@@ -35,8 +35,6 @@ houver acesso ao registro de pacotes, `yarn audit --groups dependencies`.
 
 ## Conteúdo pendente
 
-- URL definitiva do GitHub Pages/domínio;
-- revisão jurídica independente de Política e Termos;
-- capturas reais finais do mesmo AAB homologado para substituir as prévias visuais.
+- revisão jurídica independente de Política e Termos.
 
 Não publique CPF, endereço residencial, senhas, tokens, dados de cartão ou chaves privadas neste repositório.

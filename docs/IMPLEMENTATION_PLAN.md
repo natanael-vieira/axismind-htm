@@ -1,6 +1,6 @@
 # Plano único — site público do axismind
 
-Data: 04/09/2026. Estado: protótipo funcional preparado para exportação estática; publicação ainda não executada.
+Data: 04/09/2026. Estado: site funcional publicado em **https://natanael-vieira.github.io/axismind-htm/**; pendências externas e de conteúdo listadas abaixo.
 
 ## Objetivo
 
@@ -26,9 +26,17 @@ Publicar, em um único repositório separado, um site acessível e responsivo qu
 5. `/apoie/`: área futura de apoio, sem coleta nem pagamento embutido;
 6. `404`: retorno seguro para a página inicial.
 
-## Critérios do único passo de publicação
+## Fechado em 04/09/2026
 
-No mesmo candidato: definir repositório/domínio e `basePath`; validar canal `natnaelsales@gmail.com`; obter revisão jurídica; substituir as imagens conceituais por capturas reais do mesmo AAB homologado e sem dados pessoais; revisar acessibilidade, links, responsividade, metadados e contraste; confirmar se a página de apoio é compatível com os termos da hospedagem; executar `yarn install --frozen-lockfile`, `yarn typecheck` e `yarn build`; habilitar **Settings → Pages → GitHub Actions**; publicar; validar todas as URLs em HTTPS; então registrar a URL da política no aplicativo e na Play Console.
+- repositório e `basePath` definidos;
+- build e deploy pelo GitHub Actions;
+- site e rotas públicas acessíveis em HTTPS;
+- canal `natnaelsales@gmail.com` publicado;
+- Política pública disponível em `/privacidade/` e URL registrada na configuração local do aplicativo.
+
+## Critérios restantes antes da publicação comercial do aplicativo
+
+Obter revisão jurídica; concluir a revisão de acessibilidade, metadados e contraste; confirmar se a página de apoio é compatível com os termos da hospedagem; manter `yarn typecheck`, `yarn build` e auditoria de dependências como gates; cadastrar a URL pública da política na Play Console.
 
 ## Limites e riscos
 

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, DeviceMobile, FilePdf, LockKey, Waveform } from '@phosphor-icons/react/dist/ssr';
+import { ScreenshotGallery } from '@/components/ScreenshotGallery';
 import { publicPath, screenshots, site } from '@/content/site';
 
 const features = [
@@ -26,7 +27,7 @@ export default function HomePage() {
         </div>
         <div className="soft-card relative overflow-hidden p-3 sm:p-5">
           <div className="wave-rule mb-4" />
-          <Image src={publicPath('/screenshots/jornada-principal.png')} width={1536} height={1024} alt={screenshots[0].alt} priority className="h-auto w-full rounded-[1.25rem]" />
+          <Image src={publicPath('/screenshots/jornada-principal.png')} width={1536} height={1100} alt={screenshots[0].alt} priority className="mx-auto h-auto w-full object-contain" />
         </div>
       </section>
 
@@ -50,16 +51,9 @@ export default function HomePage() {
             <p className="eyebrow">Prévia do aplicativo</p>
             <h2 id="telas" className="mt-4 text-3xl font-normal sm:text-5xl">Conheça a experiência</h2>
           </div>
-          <p className="max-w-md text-sm leading-6 text-axis-body">Estas imagens apresentam a direção visual. As capturas definitivas da Play Store serão feitas diretamente no candidato homologado.</p>
+          <p className="max-w-md text-sm leading-6 text-axis-body">Capturas reais do candidato Android 1.5.10, build 19, executado no perfil de demonstração Thais Vieira.</p>
         </div>
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {screenshots.map((shot) => (
-            <figure key={shot.src} className="soft-card overflow-hidden p-3">
-              <Image src={publicPath(shot.src)} width={1536} height={1024} alt={shot.alt} className="h-auto w-full rounded-[1.25rem]" />
-              <figcaption className="px-4 py-4 font-bold">{shot.title}</figcaption>
-            </figure>
-          ))}
-        </div>
+        <ScreenshotGallery screenshots={screenshots.map((shot) => ({ ...shot, src: publicPath(shot.src) }))} />
       </section>
 
       <section className="axis-container py-16">

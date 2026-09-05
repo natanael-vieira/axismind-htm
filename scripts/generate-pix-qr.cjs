@@ -1,6 +1,6 @@
 const QRCode = require('qrcode');
 
-const pixKey = 'natanaelsales@live.com';
+const pixKey = 'natnaelsales@gmail.com';
 const beneficiary = 'NATANAEL SALES VIEIRA';
 const city = 'PALHOCA';
 
