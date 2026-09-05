@@ -13,8 +13,16 @@ yarn dev
 
 ```bash
 yarn typecheck
+yarn test:unit
+yarn test:e2e
 yarn build
 ```
+
+A suíte usa Vitest e Testing Library para componentes e contratos de conteúdo,
+e Playwright para os fluxos completos em Chromium, nos perfis desktop e móvel.
+Na primeira execução local, instale o navegador isolado com
+`yarn playwright install chromium`. Pull requests e publicações só avançam se
+tipos, testes unitários, testes E2E e build forem aprovados.
 
 O build estático é gerado em `out/`. O workflow usa o nome do repositório como `basePath`. Ao adotar domínio próprio ou repositório de usuário (`usuario.github.io`), defina `NEXT_PUBLIC_BASE_PATH` como vazio no workflow.
 

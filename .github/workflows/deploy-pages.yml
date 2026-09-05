@@ -3,12 +3,14 @@ name: Publicar site no GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions: {}
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -34,16 +36,27 @@ jobs:
         run: yarn install --frozen-lockfile --non-interactive
       - name: Verificar tipos
         run: yarn typecheck
+      - name: Executar testes unitários
+        run: yarn test:unit
+      - name: Instalar navegador dos testes E2E
+        run: yarn playwright install --with-deps chromium
+      - name: Executar testes E2E
+        run: yarn test:e2e
+        env:
+          NEXT_PUBLIC_BASE_PATH: ""
       - name: Gerar o site
         run: yarn build
       - name: Configurar o GitHub Pages
+        if: github.event_name != 'pull_request'
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
       - name: Empacotar o site
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
           path: ./out
 
   deploy:
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

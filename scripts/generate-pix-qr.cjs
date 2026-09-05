@@ -21,23 +21,30 @@ function crc16(payload) {
   return crc.toString(16).toUpperCase().padStart(4, '0');
 }
 
-const merchantAccount = field('00', 'br.gov.bcb.pix') + field('01', pixKey);
-const additionalData = field('05', '***');
-const payloadWithoutCrc =
-  field('00', '01') +
-  field('26', merchantAccount) +
-  field('52', '0000') +
-  field('53', '986') +
-  field('58', 'BR') +
-  field('59', beneficiary) +
-  field('60', city) +
-  field('62', additionalData) +
-  '6304';
-const payload = payloadWithoutCrc + crc16(payloadWithoutCrc);
+function buildPixPayload() {
+  const merchantAccount = field('00', 'br.gov.bcb.pix') + field('01', pixKey);
+  const additionalData = field('05', '***');
+  const payloadWithoutCrc =
+    field('00', '01') +
+    field('26', merchantAccount) +
+    field('52', '0000') +
+    field('53', '986') +
+    field('58', 'BR') +
+    field('59', beneficiary) +
+    field('60', city) +
+    field('62', additionalData) +
+    '6304';
 
-QRCode.toFile('public/brand/pix-qrcode.png', payload, {
-  errorCorrectionLevel: 'H',
-  margin: 4,
-  width: 720,
-  color: { dark: '#28363B', light: '#FFFFFF' },
-}).then(() => console.log('QR Code PIX gerado em public/brand/pix-qrcode.png'));
+  return payloadWithoutCrc + crc16(payloadWithoutCrc);
+}
+
+if (require.main === module) {
+  QRCode.toFile('public/brand/pix-qrcode.png', buildPixPayload(), {
+    errorCorrectionLevel: 'H',
+    margin: 4,
+    width: 720,
+    color: { dark: '#28363B', light: '#FFFFFF' },
+  }).then(() => console.log('QR Code PIX gerado em public/brand/pix-qrcode.png'));
+}
+
+module.exports = { buildPixPayload, crc16, pixKey };
