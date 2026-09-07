@@ -12,6 +12,13 @@ describe('catálogo de internacionalização', () => {
     expect(isRtl('en')).toBe(false);
   });
 
+  it('mantém cada idioma isolado dos demais', () => {
+    expect(messages.en.how.eyebrow).toBe('Usage guide');
+    expect(messages.es.how.eyebrow).toBe('Guía de uso');
+    expect(messages.fr.how.eyebrow).toBe('Guide d’utilisation');
+    expect(messages.en.how.eyebrow).not.toBe(messages.fr.how.eyebrow);
+  });
+
   it('mantém as chaves principais completas em todos os idiomas', () => {
     const keys = Object.keys(messages['pt-BR']);
 
