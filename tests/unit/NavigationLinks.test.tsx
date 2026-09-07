@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { NavigationLinks } from '@/components/NavigationLinks';
+import { NavigationLinks, SupportLink } from '@/components/NavigationLinks';
 
 let pathname = '/';
 
@@ -13,7 +13,7 @@ describe('NavigationLinks', () => {
     pathname = '/';
   });
 
-  it('marca Início como a página atual e aplica o destaque laranja', () => {
+  it('marca Início como a página atual e aplica o destaque neutro', () => {
     render(<NavigationLinks variant="desktop" />);
 
     const activeLink = screen.getByRole('link', { name: 'Início' });
@@ -29,5 +29,18 @@ describe('NavigationLinks', () => {
     const activeLink = screen.getByRole('link', { name: 'Privacidade' });
     expect(activeLink).toHaveAttribute('aria-current', 'page');
     expect(activeLink).toHaveClass('nav-pill-active');
+  });
+
+  it('mantém o apoio fora da lista principal e destaca o CTA quando ativo', () => {
+    pathname = '/apoie/';
+    render(
+      <>
+        <NavigationLinks variant="desktop" />
+        <SupportLink />
+      </>,
+    );
+
+    expect(screen.queryByRole('link', { name: 'Apoie o projeto' })).toHaveAttribute('aria-current', 'page');
+    expect(screen.getAllByRole('link', { name: 'Apoie o projeto' })).toHaveLength(1);
   });
 });

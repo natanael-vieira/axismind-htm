@@ -3,6 +3,7 @@ import { Heart, ShieldCheck } from '@phosphor-icons/react/dist/ssr';
 import { CopyPixButton } from '@/components/CopyPixButton';
 import { PageIntro } from '@/components/PageIntro';
 import { publicPath, site } from '@/content/site';
+import { Card } from '@/components/ui/card';
 
 export const metadata = { title: 'Apoie o projeto' };
 
@@ -14,7 +15,7 @@ export default function SupportPage() {
         <p>O apoio é voluntário, não oferece recursos extras no aplicativo e não condiciona atendimento. Qualquer valor ajuda a manter o projeto.</p>
       </PageIntro>
       <section className="axis-container grid gap-6 lg:grid-cols-[1.15fr_.85fr]">
-        <article className="soft-card p-7 sm:p-10">
+        <Card className="p-7 sm:p-10">
           <Heart size={38} className="text-axis-clay" />
           <h2 className="mt-6 text-3xl font-bold">Dados para apoio</h2>
           {support.enabled ? (
@@ -35,8 +36,8 @@ export default function SupportPage() {
           ) : (
             <div className="mt-6 rounded-2xl bg-axis-muted p-5"><p className="font-bold">Informações ainda não cadastradas</p><p className="mt-2 text-sm leading-6 text-axis-body">Os dados serão publicados somente depois da confirmação do beneficiário e da finalidade.</p></div>
           )}
-        </article>
-        <aside className="soft-card p-7 sm:p-10">
+        </Card>
+        <Card className="p-7 sm:p-10">
           <ShieldCheck size={38} className="text-axis-teal" />
           <h2 className="mt-6 text-2xl font-bold">Segurança</h2>
           <p className="mt-4 leading-7 text-axis-body">O site nunca solicitará senha bancária, código de autenticação, foto de documento ou dados do cartão. Prefira uma chave PIX aleatória ou institucional em vez de CPF.</p>
@@ -45,7 +46,7 @@ export default function SupportPage() {
             <p className="font-bold">Apoio internacional</p>
             <p className="mt-2 text-sm leading-6 text-axis-body">Uma opção para contribuições internacionais será adicionada futuramente.</p>
           </div>
-        </aside>
+        </Card>
       </section>
     </>
   );

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Check, Copy, WarningCircle } from '@phosphor-icons/react';
+import { Button } from '@/components/ui/button';
 
 type CopyPixButtonProps = {
   pixKey: string;
@@ -28,10 +29,10 @@ export function CopyPixButton({ pixKey }: CopyPixButtonProps) {
   }
 
   return (
-    <button
+    <Button
       type="button"
       onClick={copyPixKey}
-      className="button-primary mt-5 gap-2"
+      className="mt-5 gap-2"
       aria-live="polite"
     >
       {status === 'copied' ? <Check size={20} weight="bold" /> : null}
@@ -40,6 +41,6 @@ export function CopyPixButton({ pixKey }: CopyPixButtonProps) {
       {status === 'copied' ? 'Chave PIX copiada' : null}
       {status === 'error' ? 'Não foi possível copiar' : null}
       {status === 'idle' ? 'Copiar chave PIX' : null}
-    </button>
+    </Button>
   );
 }

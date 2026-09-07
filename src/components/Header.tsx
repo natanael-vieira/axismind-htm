@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { BrandMark } from './BrandMark';
-import { NavigationLinks } from './NavigationLinks';
+import { NavigationLinks, SupportLink } from './NavigationLinks';
 
 export function Header() {
   return (
@@ -12,13 +12,14 @@ export function Header() {
         <nav aria-label="Navegação principal" className="hidden items-center gap-1 lg:flex">
           <NavigationLinks variant="desktop" />
         </nav>
-        <a href="mailto:natnaelsales@gmail.com" className="button-secondary hidden sm:inline-flex">
-          Fale conosco
-        </a>
+        <SupportLink />
       </div>
-      <nav aria-label="Navegação móvel" className="axis-scrollbar flex gap-2 overflow-x-auto px-4 pb-3 lg:hidden">
+      <nav aria-label="Navegação móvel" className="axis-scrollbar flex gap-2 overflow-x-auto px-4 pb-4 pt-1 pr-8 lg:hidden">
         <NavigationLinks variant="mobile" />
       </nav>
+      <div className="border-t border-axis-line/50 px-4 py-2 lg:hidden">
+        <SupportLink variant="mobile" />
+      </div>
     </header>
   );
 }

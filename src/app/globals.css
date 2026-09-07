@@ -44,10 +44,7 @@ a { color: inherit; }
   .nav-pill-active { @apply border-axis-body bg-axis-surface text-axis-ink; }
   .nav-support { @apply inline-flex shrink-0 items-center justify-center rounded-full bg-axis-teal px-5 py-3 text-center text-sm font-bold text-axis-surface shadow-sm transition-transform hover:-translate-y-0.5; }
   .nav-support-active { box-shadow: 0 0 0 2px #D8D1C6; }
-  .button-primary { @apply inline-flex min-h-14 items-center justify-center rounded-full bg-axis-teal px-7 py-3 text-center font-bold text-axis-surface shadow-sm transition-transform hover:-translate-y-0.5 focus-ring; }
-  .button-secondary { @apply inline-flex min-h-14 items-center justify-center rounded-full border border-axis-line bg-axis-surface px-5 py-3 text-center text-sm font-bold leading-tight transition-colors hover:border-axis-teal focus-ring; }
   .eyebrow { @apply text-sm font-bold uppercase tracking-[.2em] text-axis-teal; }
-  .soft-card { @apply rounded-axis border border-axis-line/80 bg-axis-surface/90 shadow-soft backdrop-blur-sm; }
   .footer-title { @apply mb-4 text-sm font-bold uppercase tracking-wider text-axis-ink; }
   .footer-list { @apply space-y-3 text-sm text-axis-body; }
   .footer-list a { @apply underline-offset-4 hover:text-axis-teal hover:underline; }
@@ -55,7 +52,7 @@ a { color: inherit; }
 
 .skip-link { position: fixed; left: 1rem; top: -5rem; z-index: 100; border-radius: 999px; background: #28363B; color: #F7F4ED; padding: .8rem 1rem; font-weight: 700; }
 .skip-link:focus { top: 1rem; }
-.axis-scrollbar { scrollbar-width: none; }
+.axis-scrollbar { scrollbar-width: none; scroll-padding-inline: 1rem; }
 .axis-scrollbar::-webkit-scrollbar { display: none; }
 .text-balance { text-wrap: balance; }
 .wave-rule { height: 5px; border-radius: 999px; background: linear-gradient(90deg, #F2B68F 0 24%, #9A90AA 24% 50%, #59818F 50% 75%, #40616B 75%); }

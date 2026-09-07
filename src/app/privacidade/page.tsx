@@ -8,7 +8,7 @@ export default function PrivacyPage() {
   return (
     <>
       <PageIntro eyebrow={`Versão ${site.legalVersion}`} title="Política de Privacidade">
-        <p>Esta página explica, em linguagem direta, como o aplicativo e este site tratam informações. A versão deverá passar por revisão jurídica antes da publicação comercial.</p>
+        <p>Esta política descreve como o aplicativo e este site tratam informações, em linguagem direta.</p>
       </PageIntro>
       <LegalArticle>
         <section><h2>1. Controlador e contato</h2><p>Controlador: <strong>{site.controller}</strong>, pessoa física, {site.controllerLocation}. Canal para privacidade e direitos: <a className="font-bold underline" href={`mailto:${site.privacyEmail}`}>{site.privacyEmail}</a>.</p></section>

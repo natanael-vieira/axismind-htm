@@ -5,6 +5,7 @@ import {
   ShieldCheck,
 } from '@phosphor-icons/react/dist/ssr';
 import { PageIntro } from '@/components/PageIntro';
+import { Card } from '@/components/ui/card';
 
 export const metadata = { title: 'Segurança' };
 
@@ -51,43 +52,43 @@ export default function SecurityPage() {
         </h2>
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {controls.map(({ icon: Icon, title, body }) => (
-            <article key={title} className="soft-card p-6 sm:p-8">
+            <Card key={title} className="p-6 sm:p-8">
               <span className="inline-flex rounded-2xl bg-axis-muted p-3 text-axis-teal">
                 <Icon size={30} />
               </span>
               <h3 className="mt-5 text-xl font-bold">{title}</h3>
               <p className="mt-3 leading-7 text-axis-body">{body}</p>
-            </article>
+            </Card>
           ))}
         </div>
       </section>
 
       <section className="axis-container py-14" aria-labelledby="resultado">
-        <div className="soft-card overflow-hidden p-7 sm:p-10">
+        <Card className="overflow-hidden p-7 sm:p-10">
           <div className="wave-rule mb-8" />
           <p className="eyebrow">Avaliação automatizada independente</p>
           <h2 id="resultado" className="mt-4 text-3xl font-normal sm:text-5xl">
             O que a análise estática encontrou
           </h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            <div className="rounded-[1.5rem] bg-axis-muted p-5">
+            <Card className="rounded-[1.5rem] border-0 bg-axis-muted p-5 shadow-none">
               <strong className="block text-3xl text-axis-teal">0</strong>
               <span className="mt-2 block text-sm leading-6 text-axis-body">
                 trackers de privacidade detectados no APK analisado
               </span>
-            </div>
-            <div className="rounded-[1.5rem] bg-axis-muted p-5">
+            </Card>
+            <Card className="rounded-[1.5rem] border-0 bg-axis-muted p-5 shadow-none">
               <strong className="block text-3xl text-axis-teal">0</strong>
               <span className="mt-2 block text-sm leading-6 text-axis-body">
                 achados de configuração de segurança de rede
               </span>
-            </div>
-            <div className="rounded-[1.5rem] bg-axis-muted p-5">
+            </Card>
+            <Card className="rounded-[1.5rem] border-0 bg-axis-muted p-5 shadow-none">
               <strong className="block text-3xl text-axis-teal">1.142</strong>
               <span className="mt-2 block text-sm leading-6 text-axis-body">
                 combinações de pacote e versão consultadas sem advisory npm conhecido na data
               </span>
-            </div>
+            </Card>
           </div>
           <p className="mt-8 max-w-4xl text-sm leading-6 text-axis-body">
             Esta é uma fotografia automatizada do build de homologação, não uma
@@ -108,7 +109,7 @@ export default function SecurityPage() {
             </a>
             .
           </p>
-        </div>
+        </Card>
       </section>
     </>
   );

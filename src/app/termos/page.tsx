@@ -18,7 +18,7 @@ export default function TermsPage() {
         <section><h2>5. Recursos opcionais</h2><p>Voz, lembretes, contato de confiança, login social, PDF e backup dependem de escolha e permissões do sistema. Fabricantes e sistemas podem limitar alarmes, notificações e execução em segundo plano.</p></section>
         <section><h2>6. Exportações e perda de acesso</h2><p>Arquivos exportados ficam sob responsabilidade da pessoa. O controlador não recebe uma cópia do cofre e não consegue recuperar a senha local perdida. A exclusão do cofre é irreversível sem backup válido.</p></section>
         <section><h2>7. Propriedade e uso adequado</h2><p>A marca, interface e conteúdo autoral são protegidos. É proibido usar o produto para violar direitos, tentar acessar dados de terceiros ou contornar controles de segurança.</p></section>
-        <section><h2>8. Mudanças</h2><p>Alterações relevantes nos Termos serão identificadas por nova versão e novo aceite no aplicativo. Este texto é um rascunho técnico sujeito a validação jurídica antes da publicação comercial.</p></section>
+        <section><h2>8. Mudanças</h2><p>Alterações relevantes nos Termos serão identificadas por nova versão e novo aceite no aplicativo.</p></section>
       </LegalArticle>
     </>
   );

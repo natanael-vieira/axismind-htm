@@ -1,6 +1,7 @@
 import { CheckCircle, DownloadSimple, Microphone, Notebook, ShieldCheck } from '@phosphor-icons/react/dist/ssr';
 import Image from 'next/image';
 import { PageIntro } from '@/components/PageIntro';
+import { Card } from '@/components/ui/card';
 import { publicPath } from '@/content/site';
 
 const steps = [
@@ -19,14 +20,14 @@ export default function HowToPage() {
       </PageIntro>
       <section className="axis-container grid gap-5 lg:grid-cols-2">
         {steps.map(({ icon: Icon, title, body }, index) => (
-          <article key={title} className="soft-card flex gap-5 p-6 sm:p-8">
+          <Card key={title} className="flex gap-5 p-6 sm:p-8">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-axis-muted text-axis-teal"><Icon size={27} /></div>
             <div><p className="text-xs font-bold uppercase tracking-widest text-axis-clay">Passo {index + 1}</p><h2 className="mt-2 text-2xl font-bold">{title}</h2><p className="mt-3 leading-7 text-axis-body">{body}</p></div>
-          </article>
+          </Card>
         ))}
       </section>
       <section className="axis-container pt-12">
-        <div className="soft-card grid items-center gap-10 overflow-hidden p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(300px,430px)] lg:p-12">
+        <Card className="grid items-center gap-10 overflow-hidden p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(300px,430px)] lg:p-12">
           <div>
             <p className="eyebrow">Demonstração visual</p>
             <h2 className="mt-4 text-3xl font-normal sm:text-4xl">Veja como é simples usar o aplicativo</h2>
@@ -46,13 +47,13 @@ export default function HowToPage() {
               className="h-auto w-full rounded-[2.25rem] bg-axis-surface object-contain"
             />
           </div>
-        </div>
+        </Card>
       </section>
       <section className="axis-container py-16">
-        <div className="soft-card border-l-4 border-l-axis-clay p-7 sm:p-9">
+        <Card className="border-l-4 border-l-axis-clay p-7 sm:p-9">
           <h2 className="text-2xl font-bold">Se você precisar de ajuda imediata</h2>
           <p className="mt-3 max-w-3xl leading-7 text-axis-body">O aplicativo oferece atalhos acionados por você, mas não monitora crises nem chama socorro automaticamente. No Brasil, o CVV atende pelo 188. Em emergência médica, procure o serviço de emergência local.</p>
-        </div>
+        </Card>
       </section>
     </>
   );
