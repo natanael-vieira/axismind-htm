@@ -61,6 +61,7 @@ a { color: inherit; }
 .screenshot-trigger:hover .screenshot-thumbnail { transform: scale(1.018); filter: saturate(1.04); }
 .screenshot-zoom-hint { position: absolute; right: 1rem; bottom: 1rem; display: inline-flex; align-items: center; gap: .45rem; border: 1px solid rgba(247,244,237,.28); border-radius: 999px; background: rgba(40,54,59,.88); padding: .65rem .9rem; color: #F7F4ED; font-size: .78rem; font-weight: 700; box-shadow: 0 .5rem 1.5rem rgba(40,54,59,.2); backdrop-filter: blur(10px); transition: transform .25s ease, background-color .25s ease; }
 .screenshot-trigger:hover .screenshot-zoom-hint { transform: translateY(-.2rem); background: rgba(64,97,107,.96); }
+html[dir='rtl'] .screenshot-zoom-hint { right: auto; left: 1rem; }
 .screenshot-lightbox { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; pointer-events: none; }
 .screenshot-lightbox-content { position: relative; z-index: 1; width: 96vw; height: 96dvh; pointer-events: none; }
 .screenshot-lightbox-viewport { width: 100%; height: 100%; overflow: hidden; pointer-events: auto; cursor: grab; outline: none; touch-action: none; }

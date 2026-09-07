@@ -19,13 +19,28 @@ test('todas as rotas públicas carregam seu conteúdo principal', async ({ page 
 
 test('permite trocar o idioma da interface sem sair da página', async ({ page }) => {
   await page.goto('/');
-  const language = page.getByRole('combobox', { name: 'Idioma' });
+  const language = page.getByTestId('language-selector');
 
   await language.selectOption('en');
 
   await expect(page.getByRole('heading', { level: 1, name: 'A private space to organize what you feel' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'How it works' }).first()).toBeVisible();
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+});
+
+test('oferece os novos idiomas e ativa RTL para árabe e hebraico', async ({ page }) => {
+  await page.goto('/');
+  const language = page.getByTestId('language-selector');
+
+  await expect(language.locator('option')).toHaveCount(12);
+  await language.selectOption('ar');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ar');
+  await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+  await expect(page.getByRole('heading', { level: 1, name: 'مساحة خاصة لتنظيم ما تشعر به' })).toBeVisible();
+
+  await language.selectOption('he');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'he');
+  await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
 });
 
 test('a versão final não exibe avisos de rascunho jurídico', async ({ page }) => {
