@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { MagnifyingGlassPlus, X } from '@phosphor-icons/react';
+import { MagnifyingGlassPlus } from '@phosphor-icons/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -14,10 +14,12 @@ type Screenshot = {
 
 export function ScreenshotGallery({ screenshots }: { screenshots: readonly Screenshot[] }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [zoom, setZoom] = useState(1);
   const triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const zoomTargetRef = useRef<HTMLDivElement>(null);
 
   const openScreenshot = useCallback((index: number) => {
+    setZoom(1);
     setSelectedIndex(index);
   }, []);
 
@@ -26,6 +28,7 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
 
     const trigger = triggerRefs.current[selectedIndex];
     setSelectedIndex(null);
+    setZoom(1);
     trigger?.focus();
   }, [selectedIndex]);
 
@@ -34,24 +37,24 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    closeButtonRef.current?.focus();
+    zoomTargetRef.current?.focus();
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') closeScreenshot();
-      if (event.key === 'Tab') {
-        event.preventDefault();
-        closeButtonRef.current?.focus();
-      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => {
+          return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [closeScreenshot, selectedIndex]);
 
   const selectedScreenshot = selectedIndex === null ? null : screenshots[selectedIndex];
+
+  const changeZoom = (delta: number) => {
+    setZoom((current) => Math.min(3, Math.max(1, Number((current + delta).toFixed(2)))));
+  };
 
   return (
     <>
@@ -88,20 +91,33 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
 
       {selectedScreenshot && selectedIndex !== null ? (
         <div className="screenshot-lightbox" role="dialog" aria-modal="true" aria-labelledby="screenshot-lightbox-title">
-          <Button type="button" variant="unstyled" tabIndex={-1} className="screenshot-lightbox-backdrop" aria-label="Fechar ao clicar fora da imagem" onClick={closeScreenshot} />
           <div className="screenshot-lightbox-content">
             <p id="screenshot-lightbox-title" className="sr-only">{selectedScreenshot.title}</p>
-            <Image
-              src={selectedScreenshot.src}
-              width={1536}
-              height={1100}
-              alt={selectedScreenshot.alt}
-              priority
-              className="screenshot-lightbox-image"
-            />
-            <Button ref={closeButtonRef} type="button" variant="outline" size="icon" className="screenshot-lightbox-close" aria-label="Fechar imagem ampliada" onClick={closeScreenshot}>
-              <X size={22} weight="bold" />
-            </Button>
+            <div
+              ref={zoomTargetRef}
+              className="screenshot-lightbox-viewport"
+              tabIndex={0}
+              role="button"
+              aria-label="Imagem ampliada. Clique para alternar o zoom ou use o scroll do mouse. Pressione Escape para fechar."
+              onClick={() => setZoom((current) => current === 1 ? 1.5 : 1)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') setZoom((current) => current === 1 ? 1.5 : 1);
+              }}
+              onWheel={(event) => {
+                event.preventDefault();
+                changeZoom(event.deltaY < 0 ? 0.15 : -0.15);
+              }}
+            >
+              <Image
+                src={selectedScreenshot.src}
+                width={1536}
+                height={1100}
+                alt={selectedScreenshot.alt}
+                priority
+                className="screenshot-lightbox-image"
+                style={{ width: `${zoom * 100}%` }}
+              />
+            </div>
           </div>
         </div>
       ) : null}

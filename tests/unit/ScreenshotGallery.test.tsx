@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { ScreenshotGallery } from '@/components/ScreenshotGallery';
 
@@ -19,7 +19,7 @@ describe('ScreenshotGallery', () => {
     expect(screen.getByRole('dialog', { name: 'Jornada principal' })).toBeVisible();
     expect(document.body).toHaveStyle({ overflow: 'hidden' });
 
-    fireEvent.click(screen.getByRole('button', { name: 'Fechar imagem ampliada' }));
+    fireEvent.keyDown(window, { key: 'Escape' });
 
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
     await waitFor(() => expect(trigger).toHaveFocus());
@@ -32,5 +32,20 @@ describe('ScreenshotGallery', () => {
     fireEvent.keyDown(window, { key: 'Escape' });
 
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+  });
+
+  it('alterna o zoom com clique e ajusta pelo scroll', () => {
+    render(<ScreenshotGallery screenshots={screenshots} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Ampliar imagem: Jornada principal' }));
+
+    const zoomTarget = screen.getByRole('button', { name: /Imagem ampliada/ });
+    const image = within(zoomTarget).getByRole('img', { name: 'Mosaico um' });
+    expect(image).toHaveStyle({ width: '100%' });
+
+    fireEvent.click(zoomTarget);
+    expect(image).toHaveStyle({ width: '150%' });
+
+    fireEvent.wheel(zoomTarget, { deltaY: 100 });
+    expect(image).toHaveStyle({ width: '135%' });
   });
 });
