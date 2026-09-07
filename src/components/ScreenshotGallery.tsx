@@ -5,6 +5,7 @@ import { MagnifyingGlassPlus } from '@phosphor-icons/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { useI18n } from '@/i18n/LocaleProvider';
 
 type Screenshot = {
   src: string;
@@ -24,6 +25,7 @@ const clampScale = (scale: number) => Math.min(4, Math.max(1, scale));
 const distanceBetween = (first: Point, second: Point) => Math.hypot(second.x - first.x, second.y - first.y);
 
 export function ScreenshotGallery({ screenshots }: { screenshots: readonly Screenshot[] }) {
+  const { messages: m, translate } = useI18n();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [viewer, setViewer] = useState<ViewerState>({ scale: 1, x: 0, y: 0 });
   const triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -124,7 +126,7 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
                 type="button"
                 variant="unstyled"
                 className="screenshot-trigger"
-                aria-label={`Ampliar imagem: ${shot.title}`}
+                aria-label={translate(m.gallery.enlargeAria, { title: shot.title })}
                 aria-haspopup="dialog"
                 onClick={() => openScreenshot(index)}
               >
@@ -137,7 +139,7 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
                 />
                 <span className="screenshot-zoom-hint" aria-hidden="true">
                   <MagnifyingGlassPlus size={20} weight="bold" />
-                  Ampliar
+                  {m.gallery.enlarge}
                 </span>
               </Button>
               <figcaption className="px-4 py-4 font-bold">{shot.title}</figcaption>
@@ -155,7 +157,7 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
               className="screenshot-lightbox-viewport"
               tabIndex={0}
               role="application"
-              aria-label="Imagem ampliada. Use scroll, duplo clique ou dois dedos para zoom; arraste para mover. Pressione Escape para fechar."
+              aria-label={m.gallery.dialogAria}
               onPointerDown={handlePointerDown}
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}

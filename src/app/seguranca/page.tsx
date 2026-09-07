@@ -1,3 +1,5 @@
+'use client';
+
 import {
   CheckCircle,
   Database,
@@ -6,49 +8,31 @@ import {
 } from '@phosphor-icons/react/dist/ssr';
 import { PageIntro } from '@/components/PageIntro';
 import { Card } from '@/components/ui/card';
-
-export const metadata = { title: 'Segurança' };
+import { useI18n } from '@/i18n/LocaleProvider';
 
 const controls = [
-  {
-    icon: Database,
-    title: 'Cofre local criptografado',
-    body: 'O conteúdo pessoal fica no banco SQLCipher do aparelho. A chave do cofre é protegida pelo armazenamento seguro do sistema.',
-  },
-  {
-    icon: EyeSlash,
-    title: 'Sem sincronização automática',
-    body: 'O diário não é enviado para uma nuvem do axismind. Backup e PDF só saem do aparelho quando a própria pessoa escolhe exportar.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Backup do sistema bloqueado',
-    body: 'As regras do Android impedem que o conteúdo privado do aplicativo entre no backup automático ou na extração comum de dados.',
-  },
-  {
-    icon: CheckCircle,
-    title: 'Build Android analisado',
-    body: 'O APK 1.5.16 de homologação passou por análise estática local com MobSF 4.5.2 e por auditoria do inventário JavaScript em 7 de setembro de 2026.',
-  },
+  { icon: Database, title: 'control1Title', body: 'control1Body' },
+  { icon: EyeSlash, title: 'control2Title', body: 'control2Body' },
+  { icon: ShieldCheck, title: 'control3Title', body: 'control3Body' },
+  { icon: CheckCircle, title: 'control4Title', body: 'control4Body' },
 ] as const;
 
 export default function SecurityPage() {
+  const { messages: m } = useI18n();
   return (
     <>
       <PageIntro
-        eyebrow="Privacidade por arquitetura"
-        title="Segurança local, explicada com transparência."
+        eyebrow={m.security.eyebrow}
+        title={m.security.title}
       >
         <p>
-          O axismind foi desenhado para reduzir a exposição dos relatos: o dado
-          pessoal permanece no aparelho e cada saída depende de uma ação
-          explícita da pessoa.
+          {m.security.intro}
         </p>
       </PageIntro>
 
       <section className="axis-container py-14" aria-labelledby="controles">
         <h2 id="controles" className="text-3xl font-normal sm:text-5xl">
-          Controles presentes no aplicativo
+          {m.security.controlsTitle}
         </h2>
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {controls.map(({ icon: Icon, title, body }) => (
@@ -56,8 +40,8 @@ export default function SecurityPage() {
               <span className="inline-flex rounded-2xl bg-axis-muted p-3 text-axis-teal">
                 <Icon size={30} />
               </span>
-              <h3 className="mt-5 text-xl font-bold">{title}</h3>
-              <p className="mt-3 leading-7 text-axis-body">{body}</p>
+              <h3 className="mt-5 text-xl font-bold">{m.security[title]}</h3>
+              <p className="mt-3 leading-7 text-axis-body">{m.security[body]}</p>
             </Card>
           ))}
         </div>
@@ -66,39 +50,35 @@ export default function SecurityPage() {
       <section className="axis-container py-14" aria-labelledby="resultado">
         <Card className="overflow-hidden p-7 sm:p-10">
           <div className="wave-rule mb-8" />
-          <p className="eyebrow">Avaliação automatizada independente</p>
+          <p className="eyebrow">{m.security.resultEyebrow}</p>
           <h2 id="resultado" className="mt-4 text-3xl font-normal sm:text-5xl">
-            O que a análise estática encontrou
+            {m.security.resultTitle}
           </h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             <Card className="rounded-[1.5rem] border-0 bg-axis-muted p-5 shadow-none">
               <strong className="block text-3xl text-axis-teal">0</strong>
               <span className="mt-2 block text-sm leading-6 text-axis-body">
-                trackers de privacidade detectados no APK analisado
+                {m.security.stat1}
               </span>
             </Card>
             <Card className="rounded-[1.5rem] border-0 bg-axis-muted p-5 shadow-none">
               <strong className="block text-3xl text-axis-teal">0</strong>
               <span className="mt-2 block text-sm leading-6 text-axis-body">
-                achados de configuração de segurança de rede
+                {m.security.stat2}
               </span>
             </Card>
             <Card className="rounded-[1.5rem] border-0 bg-axis-muted p-5 shadow-none">
               <strong className="block text-3xl text-axis-teal">1.142</strong>
               <span className="mt-2 block text-sm leading-6 text-axis-body">
-                combinações de pacote e versão consultadas sem advisory npm conhecido na data
+                {m.security.stat3}
               </span>
             </Card>
           </div>
           <p className="mt-8 max-w-4xl text-sm leading-6 text-axis-body">
-            Esta é uma fotografia automatizada do build de homologação, não uma
-            certificação nem garantia de ausência de vulnerabilidades. Alertas
-            foram revisados no contexto do aplicativo e a análise será repetida
-            no artefato assinado para publicação. Testes manuais e atualização
-            contínua das dependências continuam fazendo parte do processo.
+            {m.security.resultDisclaimer}
           </p>
           <p className="mt-4 text-sm leading-6 text-axis-body">
-            Ferramenta utilizada:{' '}
+            {m.security.tool}{' '}
             <a
               className="font-bold text-axis-teal underline underline-offset-4"
               href="https://mobsf.github.io/docs/"

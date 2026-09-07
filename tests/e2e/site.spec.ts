@@ -17,6 +17,17 @@ test('todas as rotas públicas carregam seu conteúdo principal', async ({ page 
   }
 });
 
+test('permite trocar o idioma da interface sem sair da página', async ({ page }) => {
+  await page.goto('/');
+  const language = page.getByRole('combobox', { name: 'Idioma' });
+
+  await language.selectOption('en');
+
+  await expect(page.getByRole('heading', { level: 1, name: 'A private space to organize what you feel' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'How it works' }).first()).toBeVisible();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+});
+
 test('a versão final não exibe avisos de rascunho jurídico', async ({ page }) => {
   await page.goto('/privacidade/');
   await expect(page.getByText('A versão deverá passar por revisão jurídica antes da publicação comercial.')).toHaveCount(0);
