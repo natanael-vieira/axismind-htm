@@ -9,8 +9,8 @@ import { useI18n } from '@/i18n/LocaleProvider';
 
 type Screenshot = {
   src: string;
-  alt: string;
-  title: string;
+  alt?: string;
+  title?: string;
 };
 
 type ViewerState = {
@@ -119,6 +119,11 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
     <>
       <div className="mt-10 grid gap-6 md:grid-cols-2">
         {screenshots.map((shot, index) => (
+          (() => {
+            const item = index === 0 ? 'item1' : index === 1 ? 'item2' : index === 2 ? 'item3' : 'item4';
+            const title = shot.title ?? (m.gallery[`${item}Title` as keyof typeof m.gallery] as string);
+            const alt = shot.alt ?? (m.gallery[`${item}Alt` as keyof typeof m.gallery] as string);
+            return (
           <Card key={shot.src} className="overflow-hidden p-3">
             <figure>
               <Button
@@ -126,7 +131,7 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
                 type="button"
                 variant="unstyled"
                 className="screenshot-trigger"
-                aria-label={translate(m.gallery.enlargeAria, { title: shot.title })}
+                aria-label={translate(m.gallery.enlargeAria, { title })}
                 aria-haspopup="dialog"
                 onClick={() => openScreenshot(index)}
               >
@@ -134,7 +139,7 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
                   src={shot.src}
                   width={1536}
                   height={1100}
-                  alt={shot.alt}
+                  alt={alt}
                   className="screenshot-thumbnail"
                 />
                 <span className="screenshot-zoom-hint" aria-hidden="true">
@@ -142,16 +147,18 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
                   {m.gallery.enlarge}
                 </span>
               </Button>
-              <figcaption className="px-4 py-4 font-bold">{shot.title}</figcaption>
+              <figcaption className="px-4 py-4 font-bold">{title}</figcaption>
             </figure>
           </Card>
+            );
+          })()
         ))}
       </div>
 
       {selectedScreenshot && selectedIndex !== null ? (
         <div className="screenshot-lightbox" role="dialog" aria-modal="true" aria-labelledby="screenshot-lightbox-title">
           <div className="screenshot-lightbox-content">
-            <p id="screenshot-lightbox-title" className="sr-only">{selectedScreenshot.title}</p>
+            <p id="screenshot-lightbox-title" className="sr-only">{m.gallery[`item${(selectedIndex ?? 0) + 1}Title` as keyof typeof m.gallery] as string}</p>
             <div
               ref={zoomTargetRef}
               className="screenshot-lightbox-viewport"
@@ -177,7 +184,7 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
                 src={selectedScreenshot.src}
                 width={1536}
                 height={1100}
-                alt={selectedScreenshot.alt}
+                alt={selectedScreenshot.alt ?? (m.gallery[`item${selectedIndex + 1}Alt` as keyof typeof m.gallery] as string)}
                 priority
                 className="screenshot-lightbox-image"
                 draggable={false}

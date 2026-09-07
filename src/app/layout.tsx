@@ -3,6 +3,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { site } from '@/content/site';
 import { LocaleProvider } from '@/i18n/LocaleProvider';
+import { SkipLink } from '@/components/SkipLink';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -17,7 +18,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="pt-BR" data-scroll-behavior="smooth">
       <body>
         <LocaleProvider>
-          <a href="#conteudo" className="skip-link">Pular para o conteúdo</a>
+          <SkipLink />
           <Header />
           <main id="conteudo">{children}</main>
           <Footer />
