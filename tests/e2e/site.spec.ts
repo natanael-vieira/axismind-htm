@@ -19,7 +19,7 @@ test('todas as rotas públicas carregam seu conteúdo principal', async ({ page 
 
 test('permite trocar o idioma da interface sem sair da página', async ({ page }) => {
   await page.goto('/');
-  const language = page.getByRole('combobox', { name: 'Idioma' });
+  const language = page.getByTestId('language-selector');
 
   await language.selectOption('en');
 
@@ -30,7 +30,7 @@ test('permite trocar o idioma da interface sem sair da página', async ({ page }
 
 test('oferece os novos idiomas e ativa RTL para árabe e hebraico', async ({ page }) => {
   await page.goto('/');
-  const language = page.getByRole('combobox', { name: 'Idioma' });
+  const language = page.getByTestId('language-selector');
 
   await expect(language.locator('option')).toHaveCount(12);
   await language.selectOption('ar');

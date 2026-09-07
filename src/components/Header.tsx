@@ -16,6 +16,7 @@ function LanguageSwitcher() {
         value={locale}
         onChange={(event) => setLocale(event.target.value as typeof locale)}
         aria-label={m.language.label}
+        data-testid="language-selector"
         className="rounded-full border border-axis-line bg-axis-surface px-3 py-2 text-xs font-bold text-axis-ink outline-none focus:ring-2 focus:ring-axis-teal"
       >
         {locales.map((option) => <option key={option} value={option}>{localeLabels[option]}</option>)}
