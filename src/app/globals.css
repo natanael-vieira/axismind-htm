@@ -62,14 +62,12 @@ a { color: inherit; }
 .screenshot-zoom-hint { position: absolute; right: 1rem; bottom: 1rem; display: inline-flex; align-items: center; gap: .45rem; border: 1px solid rgba(247,244,237,.28); border-radius: 999px; background: rgba(40,54,59,.88); padding: .65rem .9rem; color: #F7F4ED; font-size: .78rem; font-weight: 700; box-shadow: 0 .5rem 1.5rem rgba(40,54,59,.2); backdrop-filter: blur(10px); transition: transform .25s ease, background-color .25s ease; }
 .screenshot-trigger:hover .screenshot-zoom-hint { transform: translateY(-.2rem); background: rgba(64,97,107,.96); }
 .screenshot-lightbox { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 1rem; }
-.screenshot-lightbox-backdrop { position: absolute; inset: 0; width: 100%; border: 0; background: rgba(25,35,39,.76); cursor: zoom-out; backdrop-filter: blur(4px); animation: screenshot-backdrop-in .2s ease both; }
+.screenshot-lightbox-backdrop { position: absolute; inset: 0; width: 100%; border: 0; background: rgba(242,239,231,.96); cursor: zoom-out; animation: screenshot-backdrop-in .16s ease both; }
 .screenshot-lightbox-content { position: relative; z-index: 1; display: grid; max-width: 96vw; max-height: 96dvh; place-items: center; }
-.screenshot-lightbox-close { position: absolute; top: -.75rem; right: -.75rem; z-index: 2; border: 1px solid rgba(216,209,198,.9); background: rgba(247,244,237,.94); color: #28363B; box-shadow: 0 .5rem 1.5rem rgba(10,18,21,.22); transition: transform .2s ease, background-color .2s ease; }
+.screenshot-lightbox-close { position: absolute; top: -.75rem; right: -.75rem; z-index: 2; border: 1px solid #D8D1C6; background: #F7F4ED; color: #28363B; transition: transform .2s ease, background-color .2s ease; }
 .screenshot-lightbox-close:hover { transform: scale(1.04); background: #F2EFE7; }
-.screenshot-lightbox-image { display: block; width: auto; max-width: 96vw; height: auto; max-height: 96dvh; object-fit: contain; border-radius: .5rem; box-shadow: 0 1rem 3rem rgba(10,18,21,.36); }
+.screenshot-lightbox-image { display: block; width: auto; max-width: 96vw; height: auto; max-height: 96dvh; object-fit: contain; }
 @keyframes screenshot-backdrop-in { from { opacity: 0; } to { opacity: 1; } }
-::view-transition-old(root), ::view-transition-new(root) { animation: none; }
-::view-transition-group(screenshot-0), ::view-transition-group(screenshot-1), ::view-transition-group(screenshot-2), ::view-transition-group(screenshot-3) { animation-duration: .44s; animation-timing-function: cubic-bezier(.22, 1, .36, 1); }
 .legal-article { max-width: 56rem; }
 .legal-article section { margin-top: 1.25rem; border: 1px solid #D8D1C6; border-radius: 1.5rem; background: rgba(247,244,237,.88); padding: clamp(1.25rem, 3vw, 2rem); }
 .legal-article h2 { margin: 0 0 .8rem; font-size: 1.35rem; font-weight: 700; }

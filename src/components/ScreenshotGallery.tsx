@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { MagnifyingGlassPlus, X } from '@phosphor-icons/react';
-import { flushSync } from 'react-dom';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -13,41 +12,22 @@ type Screenshot = {
   title: string;
 };
 
-type ViewTransitionDocument = Document & {
-  startViewTransition?: (update: () => void) => { finished: Promise<void> };
-};
-
 export function ScreenshotGallery({ screenshots }: { screenshots: readonly Screenshot[] }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  const transitionTo = useCallback((update: () => void) => {
-    const transitionDocument = document as ViewTransitionDocument;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (!transitionDocument.startViewTransition || reduceMotion) {
-      update();
-      return Promise.resolve();
-    }
-
-    const transition = transitionDocument.startViewTransition(() => {
-      flushSync(update);
-    });
-
-    return transition.finished.catch(() => undefined);
-  }, []);
-
   const openScreenshot = useCallback((index: number) => {
-    void transitionTo(() => setSelectedIndex(index));
-  }, [transitionTo]);
+    setSelectedIndex(index);
+  }, []);
 
   const closeScreenshot = useCallback(() => {
     if (selectedIndex === null) return;
 
     const trigger = triggerRefs.current[selectedIndex];
-    void transitionTo(() => setSelectedIndex(null)).finally(() => trigger?.focus());
-  }, [selectedIndex, transitionTo]);
+    setSelectedIndex(null);
+    trigger?.focus();
+  }, [selectedIndex]);
 
   useEffect(() => {
     if (selectedIndex === null) return;
@@ -94,7 +74,6 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
                   height={1100}
                   alt={shot.alt}
                   className="screenshot-thumbnail"
-                  style={{ viewTransitionName: selectedIndex === index ? 'none' : `screenshot-${index}` }}
                 />
                 <span className="screenshot-zoom-hint" aria-hidden="true">
                   <MagnifyingGlassPlus size={20} weight="bold" />
@@ -119,7 +98,6 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
               alt={selectedScreenshot.alt}
               priority
               className="screenshot-lightbox-image"
-              style={{ viewTransitionName: `screenshot-${selectedIndex}` }}
             />
             <Button ref={closeButtonRef} type="button" variant="outline" size="icon" className="screenshot-lightbox-close" aria-label="Fechar imagem ampliada" onClick={closeScreenshot}>
               <X size={22} weight="bold" />
