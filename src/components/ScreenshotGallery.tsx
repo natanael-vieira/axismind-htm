@@ -35,7 +35,7 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
       flushSync(update);
     });
 
-    return transition.finished;
+    return transition.finished.catch(() => undefined);
   }, []);
 
   const openScreenshot = useCallback((index: number) => {

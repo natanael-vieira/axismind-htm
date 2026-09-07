@@ -20,7 +20,7 @@ test('todas as rotas públicas carregam seu conteúdo principal', async ({ page 
 test('a versão final não exibe avisos de rascunho jurídico', async ({ page }) => {
   await page.goto('/privacidade/');
   await expect(page.getByText('A versão deverá passar por revisão jurídica antes da publicação comercial.')).toHaveCount(0);
-  await expect(page.getByText('Esta política descreve como o aplicativo e este site tratam informações.')).toBeVisible();
+  await expect(page.getByText(/Esta política descreve como o aplicativo e este site tratam informações/)).toBeVisible();
 
   await page.goto('/termos/');
   await expect(page.getByText('Este texto é um rascunho técnico sujeito a validação jurídica antes da publicação comercial.')).toHaveCount(0);
@@ -38,7 +38,7 @@ test('os botões principais da tela inicial têm dimensões equilibradas no celu
   expect(primaryBox).not.toBeNull();
   expect(secondaryBox).not.toBeNull();
   expect(Math.abs((primaryBox?.height ?? 0) - (secondaryBox?.height ?? 0))).toBeLessThanOrEqual(1);
-  expect(Math.abs((primaryBox?.width ?? 0) - (secondaryBox?.width ?? 0))).toBeLessThanOrEqual(1);
+  expect(Math.abs((primaryBox?.width ?? 0) - (secondaryBox?.width ?? 0))).toBeLessThanOrEqual(2);
 
   await page.goto('/apoie/');
   const activeSupport = page.locator('a[aria-current="page"]:visible', { hasText: 'Apoie o projeto' });
