@@ -110,24 +110,20 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
       {selectedScreenshot && selectedIndex !== null ? (
         <div className="screenshot-lightbox" role="dialog" aria-modal="true" aria-labelledby="screenshot-lightbox-title">
           <Button type="button" variant="unstyled" tabIndex={-1} className="screenshot-lightbox-backdrop" aria-label="Fechar ao clicar fora da imagem" onClick={closeScreenshot} />
-          <div className="screenshot-lightbox-panel">
-            <div className="screenshot-lightbox-header">
-              <p id="screenshot-lightbox-title" className="font-bold">{selectedScreenshot.title}</p>
-              <Button ref={closeButtonRef} type="button" variant="outline" size="icon" className="screenshot-lightbox-close" aria-label="Fechar imagem ampliada" onClick={closeScreenshot}>
-                <X size={24} weight="bold" />
-              </Button>
-            </div>
-            <div className="screenshot-lightbox-media">
-              <Image
-                src={selectedScreenshot.src}
-                width={1536}
-                height={1100}
-                alt={selectedScreenshot.alt}
-                priority
-                className="screenshot-lightbox-image"
-                style={{ viewTransitionName: `screenshot-${selectedIndex}` }}
-              />
-            </div>
+          <div className="screenshot-lightbox-content">
+            <p id="screenshot-lightbox-title" className="sr-only">{selectedScreenshot.title}</p>
+            <Image
+              src={selectedScreenshot.src}
+              width={1536}
+              height={1100}
+              alt={selectedScreenshot.alt}
+              priority
+              className="screenshot-lightbox-image"
+              style={{ viewTransitionName: `screenshot-${selectedIndex}` }}
+            />
+            <Button ref={closeButtonRef} type="button" variant="outline" size="icon" className="screenshot-lightbox-close" aria-label="Fechar imagem ampliada" onClick={closeScreenshot}>
+              <X size={22} weight="bold" />
+            </Button>
           </div>
         </div>
       ) : null}
