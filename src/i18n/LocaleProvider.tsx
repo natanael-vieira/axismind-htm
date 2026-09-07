@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { interpolate, messages, type Locale, type Messages } from './messages';
+import { interpolate, isRtl, messages, type Locale, type Messages } from './messages';
 
 type LocaleContextValue = {
   locale: Locale;
@@ -28,6 +28,8 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = locale;
+    document.documentElement.dir = isRtl(locale) ? 'rtl' : 'ltr';
+    document.documentElement.dataset.locale = locale;
     document.title = messages[locale].meta.siteTitle;
   }, [locale]);
 

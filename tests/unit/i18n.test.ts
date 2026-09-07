@@ -1,10 +1,15 @@
 import { describe, expect, it } from 'vitest';
-import { localeLabels, locales, messages } from '@/i18n/messages';
+import { isRtl, localeLabels, locales, messages } from '@/i18n/messages';
 
 describe('catálogo de internacionalização', () => {
   it('expõe os cinco idiomas suportados', () => {
-    expect(locales).toEqual(['pt-BR', 'en', 'es', 'it', 'fr']);
+    expect(locales).toEqual(['pt-BR', 'en', 'es', 'it', 'fr', 'ru', 'de', 'zh-CN', 'ja', 'ko', 'ar', 'he']);
     expect(Object.keys(localeLabels)).toHaveLength(locales.length);
+  });
+
+  it('marca somente árabe e hebraico como RTL', () => {
+    expect(locales.filter(isRtl)).toEqual(['ar', 'he']);
+    expect(isRtl('en')).toBe(false);
   });
 
   it('mantém as chaves principais completas em todos os idiomas', () => {
