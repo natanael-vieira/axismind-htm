@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navigation } from '@/content/site';
+import { useI18n } from '@/i18n/LocaleProvider';
 
 type NavigationLinksProps = {
   variant: 'desktop' | 'mobile';
@@ -19,9 +20,18 @@ export function normalizePathname(pathname: string) {
 }
 
 const supportItem = navigation.find((item) => item.href === '/apoie/')!;
+const labels = {
+  '/': 'home',
+  '/como-usar/': 'how',
+  '/seguranca/': 'security',
+  '/privacidade/': 'privacy',
+  '/termos/': 'terms',
+  '/apoie/': 'support',
+} as const;
 
 export function NavigationLinks({ variant }: NavigationLinksProps) {
   const pathname = normalizePathname(usePathname());
+  const { messages: m } = useI18n();
 
   return navigation.filter((item) => item.href !== supportItem.href).map((item) => {
     const active = pathname === item.href;
@@ -39,7 +49,7 @@ export function NavigationLinks({ variant }: NavigationLinksProps) {
         aria-current={active ? 'page' : undefined}
         className={`${baseClass}${activeClass}`}
       >
-        {item.label}
+        {m.navigation[labels[item.href]]}
       </Link>
     );
   });
@@ -47,6 +57,7 @@ export function NavigationLinks({ variant }: NavigationLinksProps) {
 
 export function SupportLink({ variant = 'desktop' }: { variant?: 'desktop' | 'mobile' }) {
   const pathname = normalizePathname(usePathname());
+  const { messages: m } = useI18n();
   const active = pathname === supportItem.href;
   const mobile = variant === 'mobile';
   const visibilityClass = mobile ? 'w-full lg:hidden' : 'hidden lg:inline-flex';
@@ -57,7 +68,7 @@ export function SupportLink({ variant = 'desktop' }: { variant?: 'desktop' | 'mo
       aria-current={active ? 'page' : undefined}
       className={`nav-support focus-ring ${visibilityClass}${active ? ' nav-support-active' : ''}`}
     >
-      {supportItem.label}
+      {m.navigation.support}
     </Link>
   );
 }
