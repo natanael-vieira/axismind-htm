@@ -21,7 +21,7 @@ export default function HomePage() {
           <p className="mt-7 max-w-xl text-lg leading-8 text-axis-body">{site.description}</p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Link href="/como-usar/" className="button-primary gap-2">Entenda como funciona <ArrowRight size={20} weight="bold" /></Link>
-            <Link href="/privacidade/" className="button-secondary">Como protegemos seus dados</Link>
+            <Link href="/seguranca/" className="button-secondary">Como protegemos seus dados</Link>
           </div>
           <p className="mt-6 max-w-xl text-sm leading-6 text-axis-body">Para maiores de 18 anos. O axismind não diagnostica, prescreve ou substitui profissionais e serviços de emergência.</p>
         </div>
@@ -62,7 +62,7 @@ export default function HomePage() {
             <p className="text-sm font-bold uppercase tracking-[.2em] text-axis-peach">Transparência desde o início</p>
             <h2 className="mt-4 max-w-2xl text-balance text-3xl font-normal sm:text-5xl">Saiba o que fica no aparelho e o que só sai por sua escolha.</h2>
           </div>
-          <Link href="/privacidade/" className="mt-8 inline-flex min-h-14 items-center rounded-full bg-axis-surface px-7 font-bold text-axis-ink lg:mt-0">Ler Política de Privacidade</Link>
+          <Link href="/seguranca/" className="mt-8 inline-flex min-h-14 items-center rounded-full bg-axis-surface px-7 font-bold text-axis-ink lg:mt-0">Conhecer os controles</Link>
         </div>
       </section>
     </>

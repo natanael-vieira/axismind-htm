@@ -3,6 +3,7 @@ import { expect, test } from '@playwright/test';
 const routes = [
   ['/', 'Um espaço privado para organizar o que você sente', 'Início'],
   ['/como-usar/', 'Comece com calma e mantenha você no controle.', 'Como usar'],
+  ['/seguranca/', 'Segurança local, explicada com transparência.', 'Segurança'],
   ['/privacidade/', 'Política de Privacidade', 'Privacidade'],
   ['/termos/', 'Termos de Uso', 'Termos'],
   ['/apoie/', 'Ajude o axismind a continuar cuidadoso e independente.', 'Apoie o projeto'],

@@ -16,6 +16,7 @@ export function Footer() {
           <h2 className="footer-title">Informações</h2>
           <ul className="footer-list">
             <li><Link href="/como-usar/">Como usar</Link></li>
+            <li><Link href="/seguranca/">Segurança</Link></li>
             <li><Link href="/privacidade/">Privacidade</Link></li>
             <li><Link href="/termos/">Termos de uso</Link></li>
           </ul>
