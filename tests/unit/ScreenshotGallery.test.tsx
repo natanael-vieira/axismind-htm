@@ -34,18 +34,18 @@ describe('ScreenshotGallery', () => {
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
   });
 
-  it('alterna o zoom com clique e ajusta pelo scroll', () => {
+  it('ajusta o zoom com scroll e duplo clique', () => {
     render(<ScreenshotGallery screenshots={screenshots} />);
     fireEvent.click(screen.getByRole('button', { name: 'Ampliar imagem: Jornada principal' }));
 
-    const zoomTarget = screen.getByRole('button', { name: /Imagem ampliada/ });
+    const zoomTarget = screen.getByRole('application', { name: /Imagem ampliada/ });
     const image = within(zoomTarget).getByRole('img', { name: 'Mosaico um' });
-    expect(image).toHaveStyle({ width: '100%' });
+    expect(image).toHaveStyle({ transform: 'translate3d(0px, 0px, 0) scale(1)' });
 
-    fireEvent.click(zoomTarget);
-    expect(image).toHaveStyle({ width: '150%' });
+    fireEvent.doubleClick(zoomTarget);
+    expect(image).toHaveStyle({ transform: 'translate3d(0px, 0px, 0) scale(2)' });
 
     fireEvent.wheel(zoomTarget, { deltaY: 100 });
-    expect(image).toHaveStyle({ width: '135%' });
+    expect(image).toHaveStyle({ transform: 'translate3d(0px, 0px, 0) scale(1.85)' });
   });
 });

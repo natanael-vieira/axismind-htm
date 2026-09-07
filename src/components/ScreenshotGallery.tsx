@@ -12,14 +12,27 @@ type Screenshot = {
   title: string;
 };
 
+type ViewerState = {
+  scale: number;
+  x: number;
+  y: number;
+};
+
+type Point = { x: number; y: number };
+
+const clampScale = (scale: number) => Math.min(4, Math.max(1, scale));
+const distanceBetween = (first: Point, second: Point) => Math.hypot(second.x - first.x, second.y - first.y);
+
 export function ScreenshotGallery({ screenshots }: { screenshots: readonly Screenshot[] }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [zoom, setZoom] = useState(1);
+  const [viewer, setViewer] = useState<ViewerState>({ scale: 1, x: 0, y: 0 });
   const triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const zoomTargetRef = useRef<HTMLDivElement>(null);
+  const pointersRef = useRef(new Map<number, Point>());
+  const gestureRef = useRef({ distance: 0, scale: 1, dragging: false, last: { x: 0, y: 0 } });
 
   const openScreenshot = useCallback((index: number) => {
-    setZoom(1);
+    setViewer({ scale: 1, x: 0, y: 0 });
     setSelectedIndex(index);
   }, []);
 
@@ -28,7 +41,7 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
 
     const trigger = triggerRefs.current[selectedIndex];
     setSelectedIndex(null);
-    setZoom(1);
+    setViewer({ scale: 1, x: 0, y: 0 });
     trigger?.focus();
   }, [selectedIndex]);
 
@@ -44,7 +57,7 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
     };
 
     window.addEventListener('keydown', handleKeyDown);
-          return () => {
+    return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', handleKeyDown);
     };
@@ -53,7 +66,51 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
   const selectedScreenshot = selectedIndex === null ? null : screenshots[selectedIndex];
 
   const changeZoom = (delta: number) => {
-    setZoom((current) => Math.min(3, Math.max(1, Number((current + delta).toFixed(2)))));
+    setViewer((current) => ({ ...current, scale: clampScale(current.scale + delta) }));
+  };
+
+  const resetViewer = () => setViewer({ scale: 1, x: 0, y: 0 });
+
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    event.currentTarget.setPointerCapture(event.pointerId);
+    pointersRef.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (pointersRef.current.size === 1) {
+      gestureRef.current = { ...gestureRef.current, dragging: true, last: { x: event.clientX, y: event.clientY } };
+    }
+    if (pointersRef.current.size === 2) {
+      const [first, second] = [...pointersRef.current.values()];
+      gestureRef.current = { ...gestureRef.current, distance: distanceBetween(first, second), scale: viewer.scale, dragging: false };
+    }
+  };
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!pointersRef.current.has(event.pointerId)) return;
+    pointersRef.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (pointersRef.current.size >= 2) {
+      const [first, second] = [...pointersRef.current.values()];
+      const initialDistance = gestureRef.current.distance;
+      if (initialDistance > 0) {
+        setViewer((current) => ({ ...current, scale: clampScale(gestureRef.current.scale * distanceBetween(first, second) / initialDistance) }));
+      }
+      return;
+    }
+    if (!gestureRef.current.dragging || viewer.scale <= 1) return;
+    const last = gestureRef.current.last;
+    const dx = event.clientX - last.x;
+    const dy = event.clientY - last.y;
+    gestureRef.current.last = { x: event.clientX, y: event.clientY };
+    setViewer((current) => ({ ...current, x: current.x + dx, y: current.y + dy }));
+  };
+
+  const handlePointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+    pointersRef.current.delete(event.pointerId);
+    gestureRef.current.dragging = false;
+    gestureRef.current.distance = 0;
+  };
+
+  const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    changeZoom(event.deltaY < 0 ? 0.15 : -0.15);
   };
 
   return (
@@ -97,15 +154,21 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
               ref={zoomTargetRef}
               className="screenshot-lightbox-viewport"
               tabIndex={0}
-              role="button"
-              aria-label="Imagem ampliada. Clique para alternar o zoom ou use o scroll do mouse. Pressione Escape para fechar."
-              onClick={() => setZoom((current) => current === 1 ? 1.5 : 1)}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter' || event.key === ' ') setZoom((current) => current === 1 ? 1.5 : 1);
+              role="application"
+              aria-label="Imagem ampliada. Use scroll, duplo clique ou dois dedos para zoom; arraste para mover. Pressione Escape para fechar."
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              onPointerCancel={handlePointerUp}
+              onWheel={handleWheel}
+              onDoubleClick={() => {
+                if (viewer.scale === 1) changeZoom(1);
+                else resetViewer();
               }}
-              onWheel={(event) => {
-                event.preventDefault();
-                changeZoom(event.deltaY < 0 ? 0.15 : -0.15);
+              onKeyDown={(event) => {
+                if (event.key === '+' || event.key === '=') changeZoom(0.15);
+                if (event.key === '-' || event.key === '_') changeZoom(-0.15);
+                if (event.key === '0') resetViewer();
               }}
             >
               <Image
@@ -115,7 +178,8 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
                 alt={selectedScreenshot.alt}
                 priority
                 className="screenshot-lightbox-image"
-                style={{ width: `${zoom * 100}%` }}
+                draggable={false}
+                style={{ transform: `translate3d(${viewer.x}px, ${viewer.y}px, 0) scale(${viewer.scale})` }}
               />
             </div>
           </div>
