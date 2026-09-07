@@ -26,7 +26,7 @@ test('a versão final não exibe avisos de rascunho jurídico', async ({ page })
   await expect(page.getByText('Este texto é um rascunho técnico sujeito a validação jurídica antes da publicação comercial.')).toHaveCount(0);
 });
 
-test('os botões principais da tela inicial têm dimensões equilibradas no celular', async ({ page }, testInfo) => {
+test('os botões principais da tela inicial ficam empilhados no celular', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'mobile', 'regra específica da viewport móvel');
   await page.goto('/');
 
@@ -37,7 +37,7 @@ test('os botões principais da tela inicial têm dimensões equilibradas no celu
 
   expect(primaryBox).not.toBeNull();
   expect(secondaryBox).not.toBeNull();
-  expect(Math.abs((primaryBox?.height ?? 0) - (secondaryBox?.height ?? 0))).toBeLessThanOrEqual(1);
+  expect((secondaryBox?.y ?? 0)).toBeGreaterThanOrEqual((primaryBox?.y ?? 0) + (primaryBox?.height ?? 0));
   expect(Math.abs((primaryBox?.width ?? 0) - (secondaryBox?.width ?? 0))).toBeLessThanOrEqual(2);
 
   await page.goto('/apoie/');

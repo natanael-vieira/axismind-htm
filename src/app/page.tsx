@@ -21,9 +21,9 @@ export default function HomePage() {
           <p className="eyebrow">Cuidado pessoal, no seu ritmo</p>
           <h1 className="mt-5 max-w-2xl text-balance text-5xl font-normal leading-[1.04] tracking-[-.04em] sm:text-7xl">{site.title}</h1>
           <p className="mt-7 max-w-xl text-lg leading-8 text-axis-body">{site.description}</p>
-          <div className="mt-9 flex w-full flex-wrap gap-3 sm:w-auto">
-            <Link href="/como-usar/" className={buttonVariants({ className: 'min-w-0 flex-1 gap-2 px-4 text-sm leading-tight sm:flex-none sm:px-7 sm:text-base' })}>Entenda como funciona <ArrowRight size={20} weight="bold" /></Link>
-            <Link href="/seguranca/" className={buttonVariants({ variant: 'outline', className: 'min-w-0 flex-1 px-4 text-sm sm:flex-none sm:px-5' })}>Como protegemos seus dados</Link>
+          <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+            <Link href="/como-usar/" className={buttonVariants({ className: 'w-full gap-2 px-4 text-sm leading-tight sm:w-auto sm:px-7 sm:text-base' })}>Entenda como funciona <ArrowRight size={20} weight="bold" /></Link>
+            <Link href="/seguranca/" className={buttonVariants({ variant: 'outline', className: 'w-full px-4 text-sm sm:w-auto sm:px-5' })}>Como protegemos seus dados</Link>
           </div>
           <p className="mt-6 max-w-xl text-sm leading-6 text-axis-body">Para maiores de 18 anos. O axismind não diagnostica, prescreve ou substitui profissionais e serviços de emergência.</p>
         </div>
