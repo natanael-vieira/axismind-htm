@@ -31,7 +31,7 @@ export default function SupportPage() {
                 <p className="mt-4 text-sm leading-6 text-axis-body">{m.support.qrHint}</p>
               </div>
               <figure className="rounded-3xl border border-axis-line bg-white p-4 text-center">
-                <Image src={publicPath(support.pixQrCode)} width={720} height={720} alt={`QR Code PIX para a chave ${support.pixKey}`} className="h-auto w-full" />
+                <Image src={publicPath(support.pixQrCode)} width={720} height={720} alt={translate(m.gallery.qrAlt, { email: support.pixKey })} className="h-auto w-full" />
                 <figcaption className="mt-3 text-sm font-bold text-axis-ink">{m.support.qrCaption}</figcaption>
               </figure>
             </div>

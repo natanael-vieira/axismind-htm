@@ -33,7 +33,7 @@ export default function HomePage() {
         </div>
         <Card className="relative overflow-hidden p-3 sm:p-5">
           <div className="wave-rule mb-4" />
-          <Image src={publicPath('/screenshots/jornada-principal.png')} width={1536} height={1100} alt={screenshots[0].alt} priority className="mx-auto h-auto w-full object-contain" />
+          <Image src={publicPath('/screenshots/jornada-principal.png')} width={1536} height={1100} alt={m.gallery.item1Alt} priority className="mx-auto h-auto w-full object-contain" />
         </Card>
       </section>
 
@@ -59,7 +59,7 @@ export default function HomePage() {
           </div>
           <p className="max-w-md text-sm leading-6 text-axis-body">{m.home.screenshotsDescription}</p>
         </div>
-        <ScreenshotGallery screenshots={screenshots.map((shot) => ({ ...shot, src: publicPath(shot.src) }))} />
+        <ScreenshotGallery screenshots={screenshots.map((shot) => ({ src: publicPath(shot.src) }))} />
       </section>
 
       <section className="axis-container py-16">

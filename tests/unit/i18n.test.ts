@@ -29,6 +29,15 @@ describe('catálogo de internacionalização', () => {
     }
   });
 
+  it('mantém textos visíveis da galeria e acessibilidade no idioma selecionado', () => {
+    expect(messages['pt-BR'].gallery.item1Title).toBe('Jornada principal');
+    expect(messages.en.gallery.item1Title).toBe('Main journey');
+    expect(messages.es.gallery.item1Title).toBe('Jornada principal');
+    expect(messages.en.accessibility.skip).toBe('Skip to content');
+    expect(messages.es.accessibility.skip).toBe('Saltar al contenido');
+    expect(messages.fr.accessibility.mainNav).toBe('Navigation principale');
+  });
+
   it('permite interpolar valores dinâmicos sem traduzir os dados', () => {
     expect(messages.en.privacy.body1).toContain('{email}');
     expect(messages.fr.privacy.body8).toContain('{age}');
