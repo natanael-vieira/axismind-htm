@@ -43,6 +43,20 @@ describe('catálogo de internacionalização', () => {
     expect(messages.fr.privacy.body8).toContain('{age}');
   });
 
+  it('publica instruções completas para excluir a conta local e os dados', () => {
+    expect(messages['pt-BR'].privacy.body6).toContain(
+      'Você > Centro de privacidade > Apagar todos os dados',
+    );
+    expect(messages['pt-BR'].privacy.body6).toContain('digite APAGAR');
+    expect(messages['pt-BR'].privacy.body6).toContain(
+      'arquivos já exportados ou compartilhados não são apagados',
+    );
+    expect(messages.en.privacy.body6).toContain(
+      'You > Privacy Center > Delete all data',
+    );
+    expect(messages.en.privacy.body6).toContain('type DELETE');
+  });
+
   it('não herda textos em inglês nos catálogos dos demais idiomas', () => {
     const flatten = (value: object, prefix = ''): Record<string, string> =>
       Object.entries(value).reduce<Record<string, string>>((result, [key, child]) => {
