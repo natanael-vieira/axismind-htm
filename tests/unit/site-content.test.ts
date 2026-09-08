@@ -14,6 +14,12 @@ const pixGenerator = require('../../scripts/generate-pix-qr.cjs') as {
 };
 
 describe('conteúdo público crítico', () => {
+  it('publica a versão legal canônica com data de vigência explícita', () => {
+    expect(site.legalVersion).toBe('2026-09-08.1');
+    expect(site.legalEffectiveDate).toBe('2026-09-08');
+    expect(site).not.toHaveProperty('controllerRegistration');
+  });
+
   it('mantém o mesmo e-mail no contato, na chave Pix e no gerador do QR Code', () => {
     expect(site.privacyEmail).toBe('natnaelsales@gmail.com');
     expect(site.support.pixKey).toBe(site.privacyEmail);

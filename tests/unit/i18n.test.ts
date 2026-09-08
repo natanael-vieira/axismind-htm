@@ -79,4 +79,11 @@ describe('catálogo de internacionalização', () => {
       expect(placeholders(messages[locale].terms.body2)).toEqual(['{age}']);
     }
   });
+
+  it('mantém consentimento e conexões externas localizados em todos os idiomas', () => {
+    for (const locale of locales.filter((item) => item !== 'en')) {
+      expect(messages[locale].privacy.body3).not.toBe(messages.en.privacy.body3);
+      expect(messages[locale].privacy.body5).not.toBe(messages.en.privacy.body5);
+    }
+  });
 });

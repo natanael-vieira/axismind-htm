@@ -45,4 +45,9 @@ houver acesso ao registro de pacotes, `yarn audit --groups dependencies`.
 
 - revisão jurídica independente de Política e Termos.
 
+Política e Termos usam a versão canônica `2026-09-08.1`, vigente desde
+08/09/2026. Qualquer mudança de conteúdo legal exige nova versão no site e no
+aplicativo, publicação do site antes do novo binário e conferência das
+declarações de Segurança dos dados na Play Console.
+
 Não publique CPF, endereço residencial, senhas, tokens, dados de cartão ou chaves privadas neste repositório.

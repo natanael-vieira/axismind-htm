@@ -45,10 +45,13 @@ test('oferece os novos idiomas e ativa RTL para árabe e hebraico', async ({ pag
 
 test('a versão final não exibe avisos de rascunho jurídico', async ({ page }) => {
   await page.goto('/privacidade/');
+  await expect(page.getByText('Versão 2026-09-08.1 · 2026-09-08')).toBeVisible();
   await expect(page.getByText('A versão deverá passar por revisão jurídica antes da publicação comercial.')).toHaveCount(0);
+  await expect(page.getByText(/CPF|CNPJ/)).toHaveCount(0);
   await expect(page.getByText(/Esta política descreve como o aplicativo e este site tratam informações/)).toBeVisible();
 
   await page.goto('/termos/');
+  await expect(page.getByText('Versão 2026-09-08.1 · 2026-09-08')).toBeVisible();
   await expect(page.getByText('Este texto é um rascunho técnico sujeito a validação jurídica antes da publicação comercial.')).toHaveCount(0);
 });
 
