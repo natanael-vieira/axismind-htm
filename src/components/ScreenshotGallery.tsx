@@ -5,7 +5,8 @@ import { MagnifyingGlassPlus } from '@phosphor-icons/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { useI18n } from '@/i18n/LocaleProvider';
+import { Messages } from '@/i18n/types';
+import { interpolate } from '@/i18n/utils';
 
 type Screenshot = {
   src: string;
@@ -24,8 +25,7 @@ type Point = { x: number; y: number };
 const clampScale = (scale: number) => Math.min(4, Math.max(1, scale));
 const distanceBetween = (first: Point, second: Point) => Math.hypot(second.x - first.x, second.y - first.y);
 
-export function ScreenshotGallery({ screenshots }: { screenshots: readonly Screenshot[] }) {
-  const { messages: m, translate } = useI18n();
+export function ScreenshotGallery({ messages: m, screenshots }: { messages: Messages; screenshots: readonly Screenshot[] }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [viewer, setViewer] = useState<ViewerState>({ scale: 1, x: 0, y: 0 });
   const triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -131,7 +131,7 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
                 type="button"
                 variant="unstyled"
                 className="screenshot-trigger"
-                aria-label={translate(m.gallery.enlargeAria, { title })}
+                aria-label={interpolate(m.gallery.enlargeAria, { title })}
                 aria-haspopup="dialog"
                 onClick={() => openScreenshot(index)}
               >

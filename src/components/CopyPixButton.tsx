@@ -3,14 +3,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { Check, Copy, WarningCircle } from '@phosphor-icons/react';
 import { Button } from '@/components/ui/button';
-import { useI18n } from '@/i18n/LocaleProvider';
 
 type CopyPixButtonProps = {
   pixKey: string;
+  labels: { idle: string; copied: string; error: string };
 };
 
-export function CopyPixButton({ pixKey }: CopyPixButtonProps) {
-  const { messages: m } = useI18n();
+export function CopyPixButton({ pixKey, labels }: CopyPixButtonProps) {
   const [status, setStatus] = useState<'idle' | 'copied' | 'error'>('idle');
   const resetTimer = useRef<number | null>(null);
 
@@ -40,9 +39,9 @@ export function CopyPixButton({ pixKey }: CopyPixButtonProps) {
       {status === 'copied' ? <Check size={20} weight="bold" /> : null}
       {status === 'error' ? <WarningCircle size={20} weight="bold" /> : null}
       {status === 'idle' ? <Copy size={20} weight="bold" /> : null}
-      {status === 'copied' ? m.copy.copied : null}
-      {status === 'error' ? m.copy.error : null}
-      {status === 'idle' ? m.copy.idle : null}
+      {status === 'copied' ? labels.copied : null}
+      {status === 'error' ? labels.error : null}
+      {status === 'idle' ? labels.idle : null}
     </Button>
   );
 }

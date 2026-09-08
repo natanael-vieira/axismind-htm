@@ -1,51 +1,31 @@
-'use client';
-
 import Link from 'next/link';
 import { BrandMark } from './BrandMark';
 import { NavigationLinks, SupportLink } from './NavigationLinks';
-import { localeLabels, locales } from '@/i18n/messages';
-import { useI18n } from '@/i18n/LocaleProvider';
+import { Locale } from '@/i18n/types';
+import { messages } from '@/i18n/messages';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
-function LanguageSwitcher() {
-  const { locale, messages: m, setLocale } = useI18n();
-
-  return (
-    <label className="inline-flex items-center gap-2 text-xs font-bold text-axis-body">
-      <span className="sr-only">{m.language.label}</span>
-      <select
-        value={locale}
-        onChange={(event) => setLocale(event.target.value as typeof locale)}
-        aria-label={m.language.label}
-        data-testid="language-selector"
-        className="rounded-full border border-axis-line bg-axis-surface px-3 py-2 text-xs font-bold text-axis-ink outline-none focus:ring-2 focus:ring-axis-teal"
-      >
-        {locales.map((option) => <option key={option} value={option}>{localeLabels[option]}</option>)}
-      </select>
-    </label>
-  );
-}
-
-export function Header() {
-  const { messages: m } = useI18n();
+export function Header({ locale }: { locale: Locale }) {
+  const m = messages[locale];
   return (
     <header className="sticky top-0 z-50 border-b border-axis-line/70 bg-axis-canvas/90 backdrop-blur-xl">
       <div className="axis-container flex min-h-20 items-center justify-between gap-6">
-        <Link href="/" className="rounded-full focus-ring">
+        <Link href={`/${locale}/`} className="rounded-full focus-ring">
           <BrandMark />
         </Link>
         <nav aria-label={m.accessibility.mainNav} className="hidden items-center gap-1 lg:flex">
-          <NavigationLinks variant="desktop" />
+          <NavigationLinks locale={locale} variant="desktop" />
         </nav>
         <div className="flex items-center gap-3">
-          <LanguageSwitcher />
-          <SupportLink />
+          <LanguageSwitcher locale={locale} />
+          <SupportLink locale={locale} variant="desktop" />
         </div>
       </div>
       <nav aria-label={m.accessibility.mobileNav} className="axis-scrollbar flex gap-2 overflow-x-auto px-4 pb-4 pt-1 pr-8 lg:hidden">
-        <NavigationLinks variant="mobile" />
+        <NavigationLinks locale={locale} variant="mobile" />
       </nav>
       <div className="border-t border-axis-line/50 px-4 py-2 lg:hidden">
-        <SupportLink variant="mobile" />
+        <SupportLink locale={locale} variant="mobile" />
       </div>
     </header>
   );

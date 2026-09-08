@@ -1,8 +1,5 @@
-'use client';
+import { Messages } from '@/i18n/types';
 
-import { useI18n } from '@/i18n/LocaleProvider';
-
-export function SkipLink() {
-  const { messages: m } = useI18n();
-  return <a href="#conteudo" className="skip-link">{m.accessibility.skip}</a>;
+export function SkipLink({ messages }: { messages: Messages }) {
+  return <a href="#conteudo" className="skip-link">{messages.accessibility.skip}</a>;
 }

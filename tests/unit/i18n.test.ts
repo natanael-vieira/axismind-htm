@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { isRtl, localeLabels, locales, messages } from '@/i18n/messages';
+import { isRtl } from '@/i18n/utils';
+import { localeLabels, locales } from '@/i18n/types';
+import { messages } from '@/i18n/messages';
 
 describe('catálogo de internacionalização', () => {
   it('expõe os cinco idiomas suportados', () => {

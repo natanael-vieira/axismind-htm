@@ -1,16 +1,18 @@
-'use client';
-
 import Image from 'next/image';
 import { Heart, ShieldCheck } from '@phosphor-icons/react/dist/ssr';
 import { CopyPixButton } from '@/components/CopyPixButton';
 import { PageIntro } from '@/components/PageIntro';
 import { publicPath, site } from '@/content/site';
 import { Card } from '@/components/ui/card';
-import { useI18n } from '@/i18n/LocaleProvider';
+import { messages } from '@/i18n/messages';
+import { Locale } from '@/i18n/types';
+import { interpolate } from '@/i18n/utils';
 
-export default function SupportPage() {
-  const { messages: m, translate } = useI18n();
+export default async function SupportPage({ params }: { params: { locale: string } }) {
+  const { locale } = await params;
+  const m = messages[locale as Locale];
   const { support } = site;
+  
   return (
     <>
       <PageIntro eyebrow={m.support.eyebrow} title={m.support.title}>
@@ -25,13 +27,13 @@ export default function SupportPage() {
               <div>
                 <dl className="grid gap-5">
                   <div><dt className="text-sm text-axis-body">{m.support.beneficiary}</dt><dd className="mt-1 font-bold">{support.beneficiary}</dd></div>
-                  <div><dt className="text-sm text-axis-body">{translate(m.support.pixKeyLabel, { email: support.pixKey })}</dt><dd className="mt-1 break-all font-bold">{support.pixKey}</dd></div>
+                  <div><dt className="text-sm text-axis-body">{interpolate(m.support.pixKeyLabel, { email: support.pixKey })}</dt><dd className="mt-1 break-all font-bold">{support.pixKey}</dd></div>
                 </dl>
-                <CopyPixButton pixKey={support.pixKey} />
+                <CopyPixButton pixKey={support.pixKey} labels={m.copy} />
                 <p className="mt-4 text-sm leading-6 text-axis-body">{m.support.qrHint}</p>
               </div>
               <figure className="rounded-3xl border border-axis-line bg-white p-4 text-center">
-                <Image src={publicPath(support.pixQrCode)} width={720} height={720} alt={translate(m.gallery.qrAlt, { email: support.pixKey })} className="h-auto w-full" />
+                <Image src={publicPath(support.pixQrCode)} width={720} height={720} alt={interpolate(m.gallery.qrAlt, { email: support.pixKey })} className="h-auto w-full" />
                 <figcaption className="mt-3 text-sm font-bold text-axis-ink">{m.support.qrCaption}</figcaption>
               </figure>
             </div>

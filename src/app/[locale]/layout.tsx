@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { site } from '@/content/site';
-import { LocaleProvider } from '@/i18n/LocaleProvider';
 import { SkipLink } from '@/components/SkipLink';
+import { getMessages } from '@/i18n/get-messages';
+import { Locale } from '@/i18n/types';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -13,16 +14,16 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children, params }: { children: React.ReactNode; params: { locale: string } }) {
+  const { locale } = await params;
+  const messages = getMessages(locale as Locale);
   return (
-    <html lang="pt-BR" data-scroll-behavior="smooth">
+    <html lang={locale} data-scroll-behavior="smooth">
       <body>
-        <LocaleProvider>
           <SkipLink />
-          <Header />
+          <Header locale={locale as Locale} messages={messages} />
           <main id="conteudo">{children}</main>
-          <Footer />
-        </LocaleProvider>
+          <Footer locale={locale as Locale} messages={messages} />
       </body>
     </html>
   );

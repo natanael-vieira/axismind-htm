@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, DeviceMobile, FilePdf, LockKey, Waveform } from '@phosphor-icons/react/dist/ssr';
@@ -7,17 +5,20 @@ import { ScreenshotGallery } from '@/components/ScreenshotGallery';
 import { Card } from '@/components/ui/card';
 import { buttonVariants } from '@/components/ui/button';
 import { publicPath, screenshots } from '@/content/site';
-import { useI18n } from '@/i18n/LocaleProvider';
+import { messages } from '@/i18n/messages';
+import { Locale } from '@/i18n/types';
 
 const features = [
-  { icon: LockKey, title: 'feature1Title', body: 'feature1Body' },
-  { icon: Waveform, title: 'feature2Title', body: 'feature2Body' },
-  { icon: DeviceMobile, title: 'feature3Title', body: 'feature3Body' },
-  { icon: FilePdf, title: 'feature4Title', body: 'feature4Body' },
+  { icon: LockKey, title: 'feature1Title' as const, body: 'feature1Body' as const },
+  { icon: Waveform, title: 'feature2Title' as const, body: 'feature2Body' as const },
+  { icon: DeviceMobile, title: 'feature3Title' as const, body: 'feature3Body' as const },
+  { icon: FilePdf, title: 'feature4Title' as const, body: 'feature4Body' as const },
 ] as const;
 
-export default function HomePage() {
-  const { messages: m } = useI18n();
+export default async function HomePage({ params }: { params: { locale: string } }) {
+  const { locale } = await params;
+  const m = messages[locale as Locale];
+
   return (
     <>
       <section className="axis-container grid min-h-[760px] items-center gap-12 py-16 lg:grid-cols-[.9fr_1.1fr] lg:py-24">
@@ -26,8 +27,8 @@ export default function HomePage() {
           <h1 className="mt-5 max-w-2xl text-balance text-5xl font-normal leading-[1.04] tracking-[-.04em] sm:text-7xl">{m.home.title}</h1>
           <p className="mt-7 max-w-xl text-lg leading-8 text-axis-body">{m.home.description}</p>
           <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-            <Link href="/como-usar/" className={buttonVariants({ className: 'w-full gap-2 px-4 text-sm leading-tight sm:w-auto sm:px-7 sm:text-base' })}>{m.home.primaryCta} <ArrowRight size={20} weight="bold" /></Link>
-            <Link href="/seguranca/" className={buttonVariants({ variant: 'outline', className: 'w-full px-4 text-sm sm:w-auto sm:px-5' })}>{m.home.secondaryCta}</Link>
+            <Link href={`/${locale}/como-usar/`} className={buttonVariants({ className: 'w-full gap-2 px-4 text-sm leading-tight sm:w-auto sm:px-7 sm:text-base' })}>{m.home.primaryCta} <ArrowRight size={20} weight="bold" /></Link>
+            <Link href={`/${locale}/seguranca/`} className={buttonVariants({ variant: 'outline', className: 'w-full px-4 text-sm sm:w-auto sm:px-5' })}>{m.home.secondaryCta}</Link>
           </div>
           <p className="mt-6 max-w-xl text-sm leading-6 text-axis-body">{m.home.disclaimer}</p>
         </div>
@@ -59,7 +60,7 @@ export default function HomePage() {
           </div>
           <p className="max-w-md text-sm leading-6 text-axis-body">{m.home.screenshotsDescription}</p>
         </div>
-        <ScreenshotGallery screenshots={screenshots.map((shot) => ({ src: publicPath(shot.src) }))} />
+        <ScreenshotGallery messages={m} screenshots={screenshots.map((shot) => ({ src: publicPath(shot.src) }))} />
       </section>
 
       <section className="axis-container py-16">
@@ -68,7 +69,7 @@ export default function HomePage() {
             <p className="text-sm font-bold uppercase tracking-[.2em] text-axis-peach">{m.home.transparencyEyebrow}</p>
             <h2 className="mt-4 max-w-2xl text-balance text-3xl font-normal sm:text-5xl">{m.home.transparencyTitle}</h2>
           </div>
-          <Link href="/seguranca/" className={buttonVariants({ variant: 'secondary', className: 'mt-8 lg:mt-0' })}>{m.home.transparencyCta}</Link>
+          <Link href={`/${locale}/seguranca/`} className={buttonVariants({ variant: 'secondary', className: 'mt-8 lg:mt-0' })}>{m.home.transparencyCta}</Link>
         </Card>
       </section>
     </>

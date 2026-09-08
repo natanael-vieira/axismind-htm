@@ -1,13 +1,13 @@
-'use client';
-
 import { LegalArticle } from '@/components/LegalArticle';
 import { PageIntro } from '@/components/PageIntro';
 import { site } from '@/content/site';
-import { useI18n } from '@/i18n/LocaleProvider';
-import type { Locale } from '@/i18n/messages';
+import { messages } from '@/i18n/messages';
+import { Locale } from '@/i18n/types';
+import { interpolate } from '@/i18n/utils';
 
-export default function TermsPage() {
-  const { locale, messages: m, translate } = useI18n();
+export default function TermsPage({ params }: { params: { locale: Locale } }) {
+  const { locale } = params;
+  const m = messages[locale];
   const variables = { controller: site.controller, location: site.controllerLocation, email: site.privacyEmail, age: site.minimumAge };
   const versionLabel: Record<Locale, string> = { 'pt-BR': 'Versão', en: 'Version', es: 'Versión', it: 'Versione', fr: 'Version', ru: 'Версия', de: 'Version', 'zh-CN': '版本', ja: 'バージョン', ko: '버전', ar: 'الإصدار', he: 'גרסה' };
   return (
@@ -16,8 +16,8 @@ export default function TermsPage() {
         <p>{m.terms.intro}</p>
       </PageIntro>
       <LegalArticle>
-        <section><h2>{m.terms.s1}</h2><p>{translate(m.terms.body1, variables)}</p></section>
-        <section><h2>{m.terms.s2}</h2><p>{translate(m.terms.body2, variables)}</p></section>
+        <section><h2>{m.terms.s1}</h2><p>{interpolate(m.terms.body1, variables)}</p></section>
+        <section><h2>{m.terms.s2}</h2><p>{interpolate(m.terms.body2, variables)}</p></section>
         <section><h2>{m.terms.s3}</h2><p>{m.terms.body3}</p></section>
         <section><h2>{m.terms.s4}</h2><p>{m.terms.body4}</p></section>
         <section><h2>{m.terms.s5}</h2><p>{m.terms.body5}</p></section>

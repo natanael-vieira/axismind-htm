@@ -1,5 +1,3 @@
-'use client';
-
 import {
   CheckCircle,
   Database,
@@ -8,7 +6,8 @@ import {
 } from '@phosphor-icons/react/dist/ssr';
 import { PageIntro } from '@/components/PageIntro';
 import { Card } from '@/components/ui/card';
-import { useI18n } from '@/i18n/LocaleProvider';
+import { messages } from '@/i18n/messages';
+import { Locale } from '@/i18n/types';
 
 const controls = [
   { icon: Database, title: 'control1Title', body: 'control1Body' },
@@ -17,8 +16,8 @@ const controls = [
   { icon: CheckCircle, title: 'control4Title', body: 'control4Body' },
 ] as const;
 
-export default function SecurityPage() {
-  const { messages: m } = useI18n();
+export default function SecurityPage({ params }: { params: { locale: Locale } }) {
+  const m = messages[params.locale];
   return (
     <>
       <PageIntro
@@ -40,8 +39,8 @@ export default function SecurityPage() {
               <span className="inline-flex rounded-2xl bg-axis-muted p-3 text-axis-teal">
                 <Icon size={30} />
               </span>
-              <h3 className="mt-5 text-xl font-bold">{m.security[title]}</h3>
-              <p className="mt-3 leading-7 text-axis-body">{m.security[body]}</p>
+              <h3 className="mt-5 text-xl font-bold">{m.security[title as keyof typeof m.security]}</h3>
+              <p className="mt-3 leading-7 text-axis-body">{m.security[body as keyof typeof m.security]}</p>
             </Card>
           ))}
         </div>

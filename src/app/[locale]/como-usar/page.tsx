@@ -1,11 +1,10 @@
-'use client';
-
 import { CheckCircle, DownloadSimple, Microphone, Notebook, ShieldCheck } from '@phosphor-icons/react/dist/ssr';
 import Image from 'next/image';
 import { PageIntro } from '@/components/PageIntro';
 import { Card } from '@/components/ui/card';
 import { publicPath } from '@/content/site';
-import { useI18n } from '@/i18n/LocaleProvider';
+import { messages } from '@/i18n/messages';
+import { Locale } from '@/i18n/types';
 
 const steps = [
   { icon: ShieldCheck, title: 'step1Title', body: 'step1Body' },
@@ -15,8 +14,8 @@ const steps = [
   { icon: DownloadSimple, title: 'step5Title', body: 'step5Body' },
 ] as const;
 
-export default function HowToPage() {
-  const { messages: m } = useI18n();
+export default function HowToPage({ params }: { params: { locale: Locale } }) {
+  const m = messages[params.locale];
   return (
     <>
       <PageIntro eyebrow={m.how.eyebrow} title={m.how.title}>
@@ -26,7 +25,7 @@ export default function HowToPage() {
         {steps.map(({ icon: Icon, title, body }, index) => (
           <Card key={title} className="flex gap-5 p-6 sm:p-8">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-axis-muted text-axis-teal"><Icon size={27} /></div>
-            <div><p className="text-xs font-bold uppercase tracking-widest text-axis-clay">{m.how.stepLabel} {index + 1}</p><h2 className="mt-2 text-2xl font-bold">{m.how[title]}</h2><p className="mt-3 leading-7 text-axis-body">{m.how[body]}</p></div>
+            <div><p className="text-xs font-bold uppercase tracking-widest text-axis-clay">{m.how.stepLabel} {index + 1}</p><h2 className="mt-2 text-2xl font-bold">{m.how[title as keyof typeof m.how]}</h2><p className="mt-3 leading-7 text-axis-body">{m.how[body as keyof typeof m.how]}</p></div>
           </Card>
         ))}
       </section>

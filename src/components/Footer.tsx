@@ -1,12 +1,11 @@
-'use client';
-
 import Link from 'next/link';
 import { BrandMark } from './BrandMark';
 import { site } from '@/content/site';
-import { useI18n } from '@/i18n/LocaleProvider';
+import { Locale } from '@/i18n/types';
+import { messages } from '@/i18n/messages';
 
-export function Footer() {
-  const { messages: m } = useI18n();
+export function Footer({ locale }: { locale: Locale }) {
+  const m = messages[locale];
   return (
     <footer className="mt-24 border-t border-axis-line bg-axis-surface">
       <div className="axis-container grid gap-10 py-12 md:grid-cols-[1.4fr_1fr_1fr]">
@@ -19,10 +18,10 @@ export function Footer() {
         <div>
           <h2 className="footer-title">{m.footer.information}</h2>
           <ul className="footer-list">
-            <li><Link href="/como-usar/">{m.navigation.how}</Link></li>
-            <li><Link href="/seguranca/">{m.navigation.security}</Link></li>
-            <li><Link href="/privacidade/">{m.navigation.privacy}</Link></li>
-            <li><Link href="/termos/">{m.footer.terms}</Link></li>
+            <li><Link href={`/${locale}/como-usar/`}>{m.navigation.how}</Link></li>
+            <li><Link href={`/${locale}/seguranca/`}>{m.navigation.security}</Link></li>
+            <li><Link href={`/${locale}/privacidade/`}>{m.navigation.privacy}</Link></li>
+            <li><Link href={`/${locale}/termos/`}>{m.footer.terms}</Link></li>
           </ul>
         </div>
         <div>
