@@ -63,7 +63,7 @@ export default function HomePage() {
       </section>
 
       <section className="axis-container py-16">
-        <Card className="overflow-hidden rounded-[2.5rem] border-0 bg-axis-ink px-7 py-12 text-axis-surface shadow-none sm:px-12 lg:flex lg:items-center lg:justify-between">
+        <Card tone="dark" className="overflow-hidden rounded-[2.5rem] px-7 py-12 sm:px-12 lg:flex lg:items-center lg:justify-between">
           <div>
             <p className="text-sm font-bold uppercase tracking-[.2em] text-axis-peach">{m.home.transparencyEyebrow}</p>
             <h2 className="mt-4 max-w-2xl text-balance text-3xl font-normal sm:text-5xl">{m.home.transparencyTitle}</h2>

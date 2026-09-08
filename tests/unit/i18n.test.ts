@@ -42,4 +42,41 @@ describe('catálogo de internacionalização', () => {
     expect(messages.en.privacy.body1).toContain('{email}');
     expect(messages.fr.privacy.body8).toContain('{age}');
   });
+
+  it('não herda textos em inglês nos catálogos dos demais idiomas', () => {
+    const flatten = (value: object, prefix = ''): Record<string, string> =>
+      Object.entries(value).reduce<Record<string, string>>((result, [key, child]) => {
+        const path = prefix ? `${prefix}.${key}` : key;
+        return typeof child === 'object'
+          ? { ...result, ...flatten(child, path) }
+          : { ...result, [path]: child };
+      }, {});
+    const english = flatten(messages.en);
+    const allowedSameValues: Partial<Record<(typeof locales)[number], string[]>> = {
+      es: ['meta.siteTitle', 'meta.homeTitle', 'meta.howTitle', 'meta.securityTitle', 'meta.privacyTitle', 'meta.termsTitle', 'meta.supportTitle'],
+      it: ['meta.siteTitle', 'navigation.privacy'],
+      fr: ['meta.siteTitle', 'footer.contact'],
+    };
+
+    for (const locale of locales.filter((item) => item !== 'pt-BR' && item !== 'en')) {
+      const catalog = flatten(messages[locale]);
+      const inherited = Object.keys(english).filter(
+        (path) => catalog[path] === english[path]
+          && !path.startsWith('meta.siteTitle')
+          && !(allowedSameValues[locale] ?? []).includes(path),
+      );
+      expect(inherited, `${locale} contém textos herdados do inglês`).toEqual([]);
+    }
+  });
+
+  it('preserva variáveis dinâmicas em todos os idiomas', () => {
+    const placeholders = (value: string) => [...value.matchAll(/\{\w+\}/g)].map(([match]) => match).sort();
+
+    for (const locale of locales) {
+      expect(placeholders(messages[locale].privacy.body1)).toEqual(['{controller}', '{email}', '{location}']);
+      expect(placeholders(messages[locale].privacy.body8)).toEqual(['{age}']);
+      expect(placeholders(messages[locale].terms.body1)).toEqual(['{controller}', '{email}', '{location}']);
+      expect(placeholders(messages[locale].terms.body2)).toEqual(['{age}']);
+    }
+  });
 });
