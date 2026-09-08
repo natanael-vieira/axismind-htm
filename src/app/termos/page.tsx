@@ -12,7 +12,7 @@ export default function TermsPage() {
   const versionLabel: Record<Locale, string> = { 'pt-BR': 'Versão', en: 'Version', es: 'Versión', it: 'Versione', fr: 'Version', ru: 'Версия', de: 'Version', 'zh-CN': '版本', ja: 'バージョン', ko: '버전', ar: 'الإصدار', he: 'גרסה' };
   return (
     <>
-      <PageIntro eyebrow={`${versionLabel[locale]} ${site.legalVersion}`} title={m.terms.title}>
+      <PageIntro eyebrow={`${versionLabel[locale]} ${site.legalVersion} · ${site.legalEffectiveDate}`} title={m.terms.title}>
         <p>{m.terms.intro}</p>
       </PageIntro>
       <LegalArticle>

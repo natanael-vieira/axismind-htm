@@ -7,7 +7,8 @@ export const site = {
   controllerLocation: 'Palhoça, Santa Catarina, Brasil',
   privacyEmail: 'natnaelsales@gmail.com',
   minimumAge: 18,
-  legalVersion: '2026-09-04.1',
+  legalVersion: '2026-09-08.1',
+  legalEffectiveDate: '2026-09-08',
   support: {
     enabled: true,
     beneficiary: 'Natanael Sales Vieira',
