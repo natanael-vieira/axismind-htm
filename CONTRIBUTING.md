@@ -21,4 +21,3 @@ build(pages): ajusta a publicação no GitHub Pages
 ```
 
 Use `feat`, `fix`, `refactor`, `docs`, `test`, `perf`, `build`, `ci`, `chore`, `style` ou `revert`. O conteúdo entre parênteses é o escopo afetado; não use parênteses vazios. A descrição pode ser escrita em português.
-

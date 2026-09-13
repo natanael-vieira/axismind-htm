@@ -38,7 +38,7 @@
     "feature4Body": "Esporta periodi in PDF o creane una copia crittografata da conservare dove preferisci.",
     "screenshotsEyebrow": "Anteprima dell’app",
     "screenshotsTitle": "Scopri l’esperienza",
-    "screenshotsDescription": "Acquisizioni reali dal candidato Android 1.5.10, build 19, eseguite con il profilo demo di Thais Vieira.",
+    "screenshotsDescription": "Acquisizioni reali dal candidato Android 1.5.17, build 26, eseguite con il profilo demo di Thais Vieira.",
     "transparencyEyebrow": "Trasparenza fin dall’inizio",
     "transparencyTitle": "Scopri cosa rimane sul dispositivo e cosa lascia solo per tua scelta.",
     "transparencyCta": "Scopri i controlli"
@@ -153,12 +153,13 @@
   "gallery": {
     "enlarge": "Ingrandire",
     "enlargeAria": "Ingrandisci immagine: {title}",
+    "close": "Chiudi immagine ingrandita",
     "dialogAria": "Immagine ingrandita. Utilizzare lo scorrimento, il doppio clic o due dita per eseguire lo zoom; trascina per spostarti. Premi Esc per chiudere.",
     "item1Title": "Percorso principale",
     "item2Title": "Cura e consulto",
     "item3Title": "Comprensione senza diagnosi",
     "item4Title": "Esportazione sotto il tuo controllo",
-    "item1Alt": "Mosaico con otto schermate reali del percorso principale di axismind",
+    "item1Alt": "Schermata reale del percorso principale di axismind",
     "item2Alt": "Mosaico con otto schermate reali delle funzioni di cura e preparazione al consulto",
     "item3Alt": "Mosaico con otto schermate reali delle funzioni di comprensione senza diagnosi",
     "item4Alt": "Mosaico con otto schermate reali di esportazione, privacy e recupero",

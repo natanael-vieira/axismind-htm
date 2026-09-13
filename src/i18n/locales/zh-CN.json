@@ -38,7 +38,7 @@
     "feature4Body": "将经期导出为 PDF 或制作加密副本以保存在您喜欢的任何地方。",
     "screenshotsEyebrow": "应用预览",
     "screenshotsTitle": "了解使用体验",
-    "screenshotsDescription": "来自 Android 候选版 1.5.10、build 19 的真实捕获，使用 Thais Vieira 演示配置文件运行。",
+    "screenshotsDescription": "来自 Android 候选版 1.5.17、build 26 的真实捕获，使用 Thais Vieira 演示配置文件运行。",
     "transparencyEyebrow": "从一开始就保持透明",
     "transparencyTitle": "了解哪些内容保留在设备上，哪些内容仅由您选择保留。",
     "transparencyCta": "了解控制选项"
@@ -153,12 +153,13 @@
   "gallery": {
     "enlarge": "放大",
     "enlargeAria": "放大图片：{title}",
+    "close": "关闭放大图像",
     "dialogAria": "放大图像。使用滚动、双击或两根手指进行缩放；拖动即可移动。按 Esc 键关闭。",
     "item1Title": "主要旅程",
     "item2Title": "照护与咨询",
     "item3Title": "不做诊断的理解",
     "item4Title": "由您控制的导出",
-    "item1Alt": "由八张 axismind 主要旅程真实截图组成的拼图",
+    "item1Alt": "axismind 主要流程的真实截图",
     "item2Alt": "由八张照护和咨询准备功能真实截图组成的拼图",
     "item3Alt": "由八张不做诊断的理解功能真实截图组成的拼图",
     "item4Alt": "由八张导出、隐私和恢复功能真实截图组成的拼图",

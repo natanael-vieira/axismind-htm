@@ -28,9 +28,10 @@ describe('conteúdo público crítico', () => {
     expect(payload.slice(-4)).toBe(pixGenerator.crc16(payloadWithoutCrc));
   });
 
-  it('publica os quatro mosaicos reais usados pela galeria', () => {
-    expect(screenshots).toHaveLength(4);
+  it('publica as capturas individuais da jornada atual', () => {
+    expect(screenshots).toHaveLength(20);
     for (const screenshot of screenshots) {
+      expect(screenshot.src).toMatch(/^\/media\/app-pt-BR\/thais-vieira\/\d{2}-.+\.png$/);
       expect(fs.existsSync(path.join(process.cwd(), 'public', screenshot.src))).toBe(true);
     }
   });

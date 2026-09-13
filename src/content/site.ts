@@ -28,25 +28,54 @@ export const navigation = [
   { href: '/apoie/', label: 'Apoie o projeto' },
 ] as const;
 
-export const screenshots = [
-  {
-    src: '/screenshots/jornada-principal.png',
-    alt: 'Mosaico com oito capturas reais da jornada principal do axismind',
-    title: 'Jornada principal',
-  },
-  {
-    src: '/screenshots/cuidado-e-consulta.png',
-    alt: 'Mosaico com oito capturas reais de recursos de cuidado e preparação para consulta do axismind',
-    title: 'Cuidado e consulta',
-  },
-  {
-    src: '/screenshots/entendimento.png',
-    alt: 'Mosaico com oito capturas reais de recursos de entendimento sem diagnóstico do axismind',
-    title: 'Entendimento sem diagnóstico',
-  },
-  {
-    src: '/screenshots/exportacao.png',
-    alt: 'Mosaico com oito capturas reais de exportação, privacidade e recuperação do axismind',
-    title: 'Exportação sob controle da pessoa',
-  },
+const journeyScreenshotFiles = [
+  '01-onboarding-introducao.png',
+  '02-onboarding-privacidade.png',
+  '03-onboarding-limites.png',
+  '04-boas-vindas-diario.png',
+  '05-boas-vindas-recursos.png',
+  '06-boas-vindas-controle.png',
+  '07-entrada-local.png',
+  '08-perfil-vazio.png',
+  '09-recorte-foto.png',
+  '10-perfil-preenchido-sem-foto.png',
+  '11-cadastro-restaurado-apos-reinicio.png',
+  '12-perfil-com-foto.png',
+  '13-home-thais-vieira.png',
+  '14-perfil-aberto-pela-foto.png',
+  '15-checkin-humor-preselecionado.png',
+  '16-novo-relato-escala-1-a-5.png',
+  '17-minhas-preferencias-sem-seletor-de-escala.png',
+  '18-corpo-intensidade-qualitativa.png',
+  '19-opcoes-de-conversa-cvv.png',
+  '20-confirmacao-manual-cvv.png',
 ] as const;
+
+const journeyScreenshotTitles = [
+  'Introdução ao diário',
+  'Privacidade no aparelho',
+  'Limites e consentimento',
+  'Boas-vindas ao diário',
+  'Recursos de organização',
+  'Controle sobre os dados',
+  'Entrada no cofre local',
+  'Criação do perfil',
+  'Recorte da foto',
+  'Dados do perfil preenchidos',
+  'Cadastro restaurado após reinício',
+  'Perfil com foto',
+  'Home de Thais Vieira',
+  'Perfil aberto pela foto da Home',
+  'Humor pré-selecionado no check-in',
+  'Relato com escala única de humor',
+  'Preferências sem escala duplicada',
+  'Intensidade corporal qualitativa',
+  'Opções de conversa por país',
+  'Confirmação antes de abrir o discador',
+] as const;
+
+export const screenshots = journeyScreenshotFiles.map((filename, index) => ({
+  src: `/media/app-pt-BR/thais-vieira/${filename}`,
+  title: journeyScreenshotTitles[index],
+  alt: `${journeyScreenshotTitles[index]} — captura real do axismind em português do Brasil`,
+}));

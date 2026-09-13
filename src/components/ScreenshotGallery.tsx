@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { MagnifyingGlassPlus } from '@phosphor-icons/react';
+import { MagnifyingGlassPlus, X } from '@phosphor-icons/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -11,6 +11,8 @@ type Screenshot = {
   src: string;
   alt?: string;
   title?: string;
+  translationItem?: 1 | 2 | 3 | 4;
+  sequence?: number;
 };
 
 type ViewerState = {
@@ -29,6 +31,7 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [viewer, setViewer] = useState<ViewerState>({ scale: 1, x: 0, y: 0 });
   const triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const zoomTargetRef = useRef<HTMLDivElement>(null);
   const pointersRef = useRef(new Map<number, Point>());
   const gestureRef = useRef({ distance: 0, scale: 1, dragging: false, last: { x: 0, y: 0 } });
@@ -52,7 +55,7 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    zoomTargetRef.current?.focus();
+    closeButtonRef.current?.focus();
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') closeScreenshot();
@@ -66,6 +69,23 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
   }, [closeScreenshot, selectedIndex]);
 
   const selectedScreenshot = selectedIndex === null ? null : screenshots[selectedIndex];
+
+  const screenshotCopy = (shot: Screenshot, index: number) => {
+    if (shot.title && shot.alt) return { title: shot.title, alt: shot.alt };
+
+    const itemNumber = shot.translationItem ?? Math.min(index + 1, 4);
+    const item = `item${itemNumber}` as 'item1' | 'item2' | 'item3' | 'item4';
+    const suffix = shot.sequence === undefined ? '' : ` ${String(shot.sequence).padStart(2, '0')}`;
+
+    return {
+      title: shot.title ?? `${m.gallery[`${item}Title`]}${suffix}`,
+      alt: shot.alt ?? `${m.gallery[`${item}Alt`]}${suffix}`,
+    };
+  };
+
+  const selectedCopy = selectedScreenshot && selectedIndex !== null
+    ? screenshotCopy(selectedScreenshot, selectedIndex)
+    : null;
 
   const changeZoom = (delta: number) => {
     setViewer((current) => ({ ...current, scale: clampScale(current.scale + delta) }));
@@ -117,12 +137,10 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
 
   return (
     <>
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {screenshots.map((shot, index) => (
           (() => {
-            const item = index === 0 ? 'item1' : index === 1 ? 'item2' : index === 2 ? 'item3' : 'item4';
-            const title = shot.title ?? (m.gallery[`${item}Title` as keyof typeof m.gallery] as string);
-            const alt = shot.alt ?? (m.gallery[`${item}Alt` as keyof typeof m.gallery] as string);
+            const { title, alt } = screenshotCopy(shot, index);
             return (
           <Card key={shot.src} className="overflow-hidden p-3">
             <figure>
@@ -137,8 +155,8 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
               >
                 <Image
                   src={shot.src}
-                  width={1536}
-                  height={1100}
+                  width={1080}
+                  height={2400}
                   alt={alt}
                   className="screenshot-thumbnail"
                 />
@@ -156,9 +174,33 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
       </div>
 
       {selectedScreenshot && selectedIndex !== null ? (
-        <div className="screenshot-lightbox" role="dialog" aria-modal="true" aria-labelledby="screenshot-lightbox-title">
+        <div
+          className="screenshot-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="screenshot-lightbox-title"
+          onPointerDown={(event) => {
+            if (event.target === event.currentTarget) closeScreenshot();
+          }}
+        >
           <div className="screenshot-lightbox-content">
-            <p id="screenshot-lightbox-title" className="sr-only">{m.gallery[`item${(selectedIndex ?? 0) + 1}Title` as keyof typeof m.gallery] as string}</p>
+            <p id="screenshot-lightbox-title" className="sr-only">{selectedCopy?.title}</p>
+            <Button
+              ref={closeButtonRef}
+              type="button"
+              variant="unstyled"
+              className="screenshot-lightbox-close"
+              aria-label={m.gallery.close}
+              onClick={closeScreenshot}
+              onKeyDown={(event) => {
+                if (event.key === 'Tab' && event.shiftKey) {
+                  event.preventDefault();
+                  zoomTargetRef.current?.focus();
+                }
+              }}
+            >
+              <X size={26} weight="bold" aria-hidden="true" />
+            </Button>
             <div
               ref={zoomTargetRef}
               className="screenshot-lightbox-viewport"
@@ -175,6 +217,10 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
                 else resetViewer();
               }}
               onKeyDown={(event) => {
+                if (event.key === 'Tab' && !event.shiftKey) {
+                  event.preventDefault();
+                  closeButtonRef.current?.focus();
+                }
                 if (event.key === '+' || event.key === '=') changeZoom(0.15);
                 if (event.key === '-' || event.key === '_') changeZoom(-0.15);
                 if (event.key === '0') resetViewer();
@@ -182,9 +228,9 @@ export function ScreenshotGallery({ screenshots }: { screenshots: readonly Scree
             >
               <Image
                 src={selectedScreenshot.src}
-                width={1536}
-                height={1100}
-                alt={selectedScreenshot.alt ?? (m.gallery[`item${selectedIndex + 1}Alt` as keyof typeof m.gallery] as string)}
+                width={1080}
+                height={2400}
+                alt={selectedCopy?.alt ?? ''}
                 priority
                 className="screenshot-lightbox-image"
                 draggable={false}

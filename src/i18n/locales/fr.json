@@ -38,7 +38,7 @@
     "feature4Body": "Exportez les périodes au format PDF ou créez une copie cryptée à conserver où vous préférez.",
     "screenshotsEyebrow": "Aperçu de l’application",
     "screenshotsTitle": "Découvrez l’expérience",
-    "screenshotsDescription": "Captures réelles du candidat Android 1.5.10, build 19, exécutées avec le profil de démonstration Thais Vieira.",
+    "screenshotsDescription": "Captures réelles du candidat Android 1.5.17, build 26, exécutées avec le profil de démonstration Thais Vieira.",
     "transparencyEyebrow": "Transparence dès le départ",
     "transparencyTitle": "Sachez ce qui reste sur l'appareil et ce qui reste uniquement selon votre choix.",
     "transparencyCta": "Découvrir les contrôles"
@@ -153,12 +153,13 @@
   "gallery": {
     "enlarge": "Agrandir",
     "enlargeAria": "Agrandir l'image : {title}",
+    "close": "Fermer l’image agrandie",
     "dialogAria": "Image agrandie. Utilisez le défilement, double-cliquez ou deux doigts pour zoomer ; faites glisser pour vous déplacer. Appuyez sur Échap pour fermer.",
     "item1Title": "Parcours principal",
     "item2Title": "Soin et consultation",
     "item3Title": "Comprendre sans diagnostic",
     "item4Title": "Export sous votre contrôle",
-    "item1Alt": "Mosaïque de huit captures réelles du parcours principal axismind",
+    "item1Alt": "Capture réelle du parcours principal axismind",
     "item2Alt": "Mosaïque de huit captures réelles des fonctions de soin et de préparation aux consultations",
     "item3Alt": "Mosaïque de huit captures réelles des fonctions de compréhension sans diagnostic",
     "item4Alt": "Mosaïque de huit captures réelles d’exportation, de confidentialité et de récupération",

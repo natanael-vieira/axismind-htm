@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { isRtl, locales } from '@/i18n/messages';
 
 const routes = [
   ['/', 'Um espaço privado para organizar o que você sente', 'Início'],
@@ -16,6 +17,19 @@ test('todas as rotas públicas carregam seu conteúdo principal', async ({ page 
     await expect(page.locator('a[aria-current="page"]:visible', { hasText: activeLabel })).toBeVisible();
   }
 });
+
+for (const locale of locales) {
+  test(`todas as rotas públicas funcionam em ${locale}`, async ({ page }) => {
+    for (const [route] of routes) {
+      await page.goto(route);
+      await page.getByTestId('language-selector').selectOption(locale);
+
+      await expect(page.locator('html')).toHaveAttribute('lang', locale);
+      await expect(page.locator('html')).toHaveAttribute('dir', isRtl(locale) ? 'rtl' : 'ltr');
+      await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    }
+  });
+}
 
 test('permite trocar o idioma da interface sem sair da página', async ({ page }) => {
   await page.goto('/');
@@ -76,12 +90,17 @@ test('os botões principais da tela inicial ficam empilhados no celular', async 
   expect((supportBox?.x ?? 0) + (supportBox?.width ?? 0)).toBeLessThanOrEqual(viewport?.width ?? 0);
 });
 
-test('a galeria amplia e fecha um mosaico mantendo a navegação por teclado', async ({ page }) => {
+test('a galeria amplia e fecha uma captura mantendo a navegação por teclado', async ({ page }) => {
   await page.goto('/#telas');
-  const trigger = page.getByRole('button', { name: 'Ampliar imagem: Jornada principal' });
+  const trigger = page.getByRole('button', { name: 'Ampliar imagem: Introdução ao diário' });
 
   await trigger.click();
-  await expect(page.getByRole('dialog', { name: 'Jornada principal' })).toBeVisible();
+  await expect(page.getByRole('dialog', { name: 'Introdução ao diário' })).toBeVisible();
+  await page.getByRole('button', { name: 'Fechar imagem ampliada' }).click();
+  await expect(page.getByRole('dialog')).toBeHidden();
+  await expect(trigger).toBeFocused();
+
+  await trigger.click();
   await page.keyboard.press('Escape');
 
   await expect(page.getByRole('dialog')).toBeHidden();
