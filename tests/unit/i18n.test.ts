@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { isRtl, localeLabels, locales, messages } from '@/i18n/messages';
 
 describe('catálogo de internacionalização', () => {
-  it('expõe os cinco idiomas suportados', () => {
+  it('expõe os idiomas suportados', () => {
     expect(locales).toEqual(['pt-BR', 'en', 'es', 'it', 'fr', 'ru', 'de', 'zh-CN', 'ja', 'ko', 'ar', 'he']);
     expect(Object.keys(localeLabels)).toHaveLength(locales.length);
   });

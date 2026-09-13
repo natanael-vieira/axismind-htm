@@ -38,7 +38,7 @@
     "feature4Body": "Exporta períodos como PDF o haz una copia cifrada para guardarla donde prefieras.",
     "screenshotsEyebrow": "Vista previa de la app",
     "screenshotsTitle": "Conoce la experiencia",
-    "screenshotsDescription": "Capturas reales del candidato de Android 1.5.10, compilación 19, ejecutadas con el perfil de demostración de Thais Vieira.",
+    "screenshotsDescription": "Capturas reales del candidato de Android 1.5.17, compilación 26, ejecutadas con el perfil de demostración de Thais Vieira.",
     "transparencyEyebrow": "Transparencia desde el inicio",
     "transparencyTitle": "Sepa qué permanece en el dispositivo y qué sale solo por su elección.",
     "transparencyCta": "Conocer los controles"
@@ -153,12 +153,13 @@
   "gallery": {
     "enlarge": "Agrandar",
     "enlargeAria": "Ampliar imagen: {title}",
+    "close": "Cerrar imagen ampliada",
     "dialogAria": "Imagen ampliada. Utilice el desplazamiento, haga doble clic o dos dedos para hacer zoom; arrastrar para mover. Presione Escape para cerrar.",
     "item1Title": "Jornada principal",
     "item2Title": "Cuidado y consulta",
     "item3Title": "Comprensión sin diagnóstico",
     "item4Title": "Exportación bajo tu control",
-    "item1Alt": "Mosaico con ocho capturas reales de la jornada principal de axismind",
+    "item1Alt": "Captura real de la jornada principal de axismind",
     "item2Alt": "Mosaico con ocho capturas reales de recursos de cuidado y preparación para consultas",
     "item3Alt": "Mosaico con ocho capturas reales de recursos de comprensión sin diagnóstico",
     "item4Alt": "Mosaico con ocho capturas reales de exportación, privacidad y recuperación",

@@ -38,7 +38,7 @@
     "feature4Body": "Exportieren Sie Zeiträume als PDF oder erstellen Sie eine verschlüsselte Kopie, um sie an einem beliebigen Ort aufzubewahren.",
     "screenshotsEyebrow": "App-Vorschau",
     "screenshotsTitle": "Die Erfahrung kennenlernen",
-    "screenshotsDescription": "Echte Aufnahmen vom Android-Kandidaten 1.5.10, Build 19, ausgeführt mit dem Thais Vieira-Demoprofil.",
+    "screenshotsDescription": "Echte Aufnahmen vom Android-Kandidaten 1.5.17, Build 26, ausgeführt mit dem Thais Vieira-Demoprofil.",
     "transparencyEyebrow": "Transparenz von Anfang an",
     "transparencyTitle": "Nur durch Ihre Wahl erfahren Sie, was auf dem Gerät bleibt und was es verlässt.",
     "transparencyCta": "Kontrollen kennenlernen"
@@ -153,12 +153,13 @@
   "gallery": {
     "enlarge": "Vergrößern",
     "enlargeAria": "Bild vergrößern: {title}",
+    "close": "Vergrößertes Bild schließen",
     "dialogAria": "Vergrößertes Bild. Zum Zoomen verwenden Sie Scrollen, einen Doppelklick oder zwei Finger. Zum Verschieben ziehen. Drücken Sie zum Schließen die Escape-Taste.",
     "item1Title": "Hauptweg",
     "item2Title": "Fürsorge und Beratung",
     "item3Title": "Verstehen ohne Diagnose",
     "item4Title": "Export unter Ihrer Kontrolle",
-    "item1Alt": "Mosaik mit acht echten Aufnahmen des axismind-Hauptwegs",
+    "item1Alt": "Echte Aufnahme des axismind-Hauptwegs",
     "item2Alt": "Mosaik mit acht echten Aufnahmen der Fürsorge- und Beratungsfunktionen",
     "item3Alt": "Mosaik mit acht echten Aufnahmen zum Verstehen ohne Diagnose",
     "item4Alt": "Mosaik mit acht echten Aufnahmen zu Export, Datenschutz und Wiederherstellung",

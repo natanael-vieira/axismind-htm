@@ -38,7 +38,7 @@
     "feature4Body": "期間を PDF としてエクスポートするか、暗号化されたコピーを作成して、好きな場所に保存します。",
     "screenshotsEyebrow": "アプリのプレビュー",
     "screenshotsTitle": "体験を見る",
-    "screenshotsDescription": "Android 候補 1.5.10、ビルド 19 からの実際のキャプチャは、Thais Vieira デモ プロファイルで実行されます。",
+    "screenshotsDescription": "Android 候補 1.5.17、ビルド 26 からの実際のキャプチャは、Thais Vieira デモ プロファイルで実行されます。",
     "transparencyEyebrow": "最初から透明に",
     "transparencyTitle": "何がデバイスに残り、何を残すかは自分の選択によってのみわかります。",
     "transparencyCta": "管理方法を見る"
@@ -153,12 +153,13 @@
   "gallery": {
     "enlarge": "拡大する",
     "enlargeAria": "画像を拡大: {title}",
+    "close": "拡大画像を閉じる",
     "dialogAria": "拡大画像。スクロール、ダブルクリック、または 2 本の指を使用してズームします。ドラッグして移動します。 Esc キーを押して閉じます。",
     "item1Title": "メインの流れ",
     "item2Title": "ケアと相談",
     "item3Title": "診断しない理解",
     "item4Title": "自分で管理するエクスポート",
-    "item1Alt": "axismind のメインの流れを示す8枚の実際の画面のモザイク",
+    "item1Alt": "axismind のメインの流れを示す実際の画面",
     "item2Alt": "ケアと相談準備の機能を示す8枚の実際の画面のモザイク",
     "item3Alt": "診断しない理解の機能を示す8枚の実際の画面のモザイク",
     "item4Alt": "エクスポート、プライバシー、復元の機能を示す8枚の実際の画面のモザイク",

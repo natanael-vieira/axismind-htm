@@ -38,7 +38,7 @@
     "feature4Body": "기간을 PDF로 내보내거나 암호화된 사본을 만들어 원하는 곳에 보관하세요.",
     "screenshotsEyebrow": "앱 미리보기",
     "screenshotsTitle": "경험 살펴보기",
-    "screenshotsDescription": "Android 후보 1.5.10, 빌드 19의 실제 캡처는 Thais Vieira 데모 프로필로 실행됩니다.",
+    "screenshotsDescription": "Android 후보 1.5.17, 빌드 26의 실제 캡처는 Thais Vieira 데모 프로필로 실행됩니다.",
     "transparencyEyebrow": "처음부터 투명하게",
     "transparencyTitle": "장치에 무엇이 남아 있고 무엇을 선택해야만 떠나는지 알 수 있습니다.",
     "transparencyCta": "제어 기능 알아보기"
@@ -153,12 +153,13 @@
   "gallery": {
     "enlarge": "크게 하다",
     "enlargeAria": "이미지 확대: {title}",
+    "close": "확대 이미지 닫기",
     "dialogAria": "확대된 이미지. 확대/축소하려면 스크롤, 더블클릭 또는 두 손가락을 사용하세요. 드래그하여 이동하세요. 닫으려면 Esc를 누르세요.",
     "item1Title": "주요 여정",
     "item2Title": "돌봄과 상담",
     "item3Title": "진단 없는 이해",
     "item4Title": "내가 관리하는 내보내기",
-    "item1Alt": "axismind 주요 여정의 실제 화면 8장을 모은 이미지",
+    "item1Alt": "axismind 주요 여정의 실제 화면",
     "item2Alt": "돌봄과 상담 준비 기능의 실제 화면 8장을 모은 이미지",
     "item3Alt": "진단 없는 이해 기능의 실제 화면 8장을 모은 이미지",
     "item4Alt": "내보내기, 개인정보 보호 및 복구 기능의 실제 화면 8장을 모은 이미지",
